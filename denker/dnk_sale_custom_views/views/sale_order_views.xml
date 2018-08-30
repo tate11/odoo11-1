@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Denker Sale Quotation Form - 1. Hide Create Button, 2. Show Send by Mail Button on Done Status -->
+    <record id="dnk_view_sale_quotation_hide_create_form" model="ir.ui.view">
+        <field name="name">dnk.view.sale.quotation.hide.create.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">false</attribute>
+            </xpath>
+            <xpath expr="//form/header/button[10]" position="attributes">
+                <attribute name="states">sent,sale,done</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="dnk_view_sale_quotation_show_create_form" model="ir.ui.view">
+        <field name="name">dnk.view.sale.quotation.show.create.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="groups_id" eval="[(4, ref('dnk_group_sale_order_create'))]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+            <xpath expr="//form/header/button[10]" position="attributes">
+                <attribute name="states">sent,sale,done</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Denker Sale Quotation Tree - Hide Create Button -->
+    <record id="dnk_view_sale_quotation_hide_create_tree" model="ir.ui.view">
+        <field name="name">dnk.view.sale.quotation.hide.create.tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="dnk_view_sale_quotation_show_create_tree" model="ir.ui.view">
+        <field name="name">dnk.view.sale.quotation.show.create.tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="groups_id" eval="[(4, ref('dnk_group_sale_order_create'))]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Denker Sale Order Tree - Hide Create Button -->
+    <record id="dnk_view_sale_order_hide_create_tree" model="ir.ui.view">
+        <field name="name">dnk.view.sale.order.hide.create.tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="dnk_view_sale_order_show_create_tree" model="ir.ui.view">
+        <field name="name">dnk.view.sale.order.show.create.tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="groups_id" eval="[(4, ref('dnk_group_sale_order_create'))]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

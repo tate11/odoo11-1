@@ -1,0 +1,40 @@
+<odoo>
+    <!-- Esconder el el recuadro "Invoicing and shipping address:" -->
+    <template id="report_saleorder_document_commitment_date" inherit_id="sale.report_saleorder_document">
+          <xpath expr="//div[@id='informations']" position="inside">
+              <div t-if="doc.commitment_date and doc.state in ['sale', 'done']" class="col-xs-3">
+                  <strong>Commitment Date:</strong>
+                  <p t-field="doc.commitment_date"/>
+              </div>
+          </xpath>
+    </template>
+
+    <!-- Quitar los campos requested_date y commitment_date de su posición original -->
+    <record id="view_sale_order_form_hide_sale_order_dates" model="ir.ui.view">
+    <field name="name">sale.order.form.hide.sale.order.dates</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale_order_dates.view_order_form_inherit_sale_stock_inherit_sale_order_dates"/>
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='requested_date']" position="replace">
+        </xpath>
+        <xpath expr="//field[@name='commitment_date']" position="replace">
+        </xpath>
+    </field>
+    </record>
+
+    <!-- Colocar siempre a la vista los campos requested_date y commitment_date -->
+    <record id="view_sale_order_form_show_sale_order_dates" model="ir.ui.view">
+        <field name="name">sale.order.form.show.sale.order.dates</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="requested_date"/>
+                <field name="dnk_original_commitment_date"/>
+                <field name="commitment_date"/>
+                <field name="dnk_commitment_date_changed" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
