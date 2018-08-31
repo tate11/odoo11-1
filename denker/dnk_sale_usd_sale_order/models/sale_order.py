@@ -5,17 +5,23 @@ class AddAmountUSDtoSaleOrder(models.Model):
     _inherit = "sale.order"
 
     @api.multi
-    @api.onchange('amount_untaxed')
+    @api.depends('amount_untaxed','pricelist_id')
+    @api.onchange('amount_untaxed','pricelist_id')
     def _update_untaxed_amount_usd(self):
         res_currency_rate = self.env['res.currency.rate']
         date = self._context.get('date') or fields.Datetime.now()
+        res_currency_usd_id = 3
+
         for rec in self:
             if rec.pricelist_id.currency_id.name  == 'USD':
-                rec.amount_untaxed_usd = rec.amount_untaxed
+                rec.dnk_amount_untaxed_usd = rec.amount_untaxed
+                for line in rec.order_line:
+                    line.dnk_price_subtotal_usd = line.price_subtotal
             elif rec.pricelist_id.currency_id.name  == 'MXN':
-                exchange_rate = res_currency_rate.search([('currency_id', '=', rec.pricelist_id.currency_id.id), ('name', '<=', date)], limit=1, order="name desc").rate
-                rec.amount_untaxed_usd = amount_untaxed * exchange_rate
-            else: rec.amount_untaxed_usd = 1.0
+                exchange_rate = res_currency_rate.search([('currency_id', '=', res_currency_usd_id), ('name', '<=', date)], limit=1, order="name desc").rate
+                rec.dnk_amount_untaxed_usd = rec.amount_untaxed * exchange_rate
+                for line in rec.order_line:
+                    line.dnk_price_subtotal_usd = line.price_subtotal * exchange_rate
 
 
-    amount_untaxed_usd = fields.Float('Untaxed Amount USD', compute='_update_untaxed_amount_usd', store=True)
+    dnk_amount_untaxed_usd = fields.Float('- Untaxed Amount USD', compute='_update_untaxed_amount_usd', store=True)
