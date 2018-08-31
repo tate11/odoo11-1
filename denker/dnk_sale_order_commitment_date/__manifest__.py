@@ -26,8 +26,8 @@
     # always loaded
     'data': [
         'views/mail_commitment_date_template_data.xml',
-        'views/partner_views.xml',
         'views/crm_team_views.xml',
+        'views/partner_views.xml',
         'views/sale_report_templates.xml',
     ],
     # only loaded in demonstration mode
