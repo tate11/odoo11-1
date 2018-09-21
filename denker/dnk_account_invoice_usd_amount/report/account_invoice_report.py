@@ -31,14 +31,14 @@ class AccountInvoiceReport(models.Model):
         select_residual_usd = ",sub.dnk_residual_usd as dnk_residual_usd"
         select_family_color = ",sub.family as dnk_family , sub.color as dnk_color "
 
-        return super(AccountInvoiceReport, self)._select() + select_subtotal_usd + select_residual_usd
+        return super(AccountInvoiceReport, self)._select() + select_subtotal_usd + select_residual_usd + select_family_color
 
 
     def _sub_select(self):
         string_subtotal_usd = ",SUM(ail.dnk_price_subtotal_usd * invoice_type.sign) AS dnk_price_subtotal_usd"
         string_residual_usd = ",ai.dnk_residual_usd / (SELECT count(*) FROM account_invoice_line l2 where invoice_id = ai.id) * count(*) * invoice_type.sign AS dnk_residual_usd"
         string_family_color = ",pc.family, pc.color"
-        return super(AccountInvoiceReport, self)._sub_select() + string_subtotal_usd + string_residual_usd
+        return super(AccountInvoiceReport, self)._sub_select() + string_subtotal_usd + string_residual_usd + string_family_color
 
     def _group_by(self):
         group_family_color = ",pc.family, pc.color"
