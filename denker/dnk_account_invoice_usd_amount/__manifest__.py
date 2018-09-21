@@ -4,6 +4,7 @@
     'author': 'Servicios Corporativos Denker - BC',
     'website': 'www.grupodenker.com',
     'license': 'AGPL-3',
+    'summary': 'Se agrega el campo de monto en USD a Facturas y Pagos',
     "category": "Account Invoice",
     "description": """ This module add Untaxed USD amount in Account Invoice,
                        Account Invoice Line and Account Payment .""",

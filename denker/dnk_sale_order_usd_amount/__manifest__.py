@@ -5,6 +5,7 @@
     'website': 'www.grupodenker.com',
     'license': 'AGPL-3',
     "category": "Sale Order",
+    'summary': 'Se agrega el campo de monto en USD a Pedidos de Venta y Cotizaciones.',
     "description": """ This module add Untaxed USD amount in Sale Order and Sale Order Line .""",
     'depends': ['sale'],
     'data': [
