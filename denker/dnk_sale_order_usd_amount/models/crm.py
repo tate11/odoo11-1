@@ -15,4 +15,4 @@ class CRMLead(models.Model):
                     total += order.dnk_amount_untaxed_usd
             lead.dnk_sale_amount_total_usd = total
 
-    dnk_sale_amount_total_usd = fields.Integer(compute='_dnk_compute_sale_amount_total_usd', string="- Number of Quotations USD", store=False)
+    dnk_sale_amount_total_usd = fields.Float(compute='_dnk_compute_sale_amount_total_usd', string="- Number of Quotations USD", store=False)
