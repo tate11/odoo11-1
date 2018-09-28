@@ -10,6 +10,7 @@
     'depends': ['sale'],
     'data': [
         'views/sale_order.xml',
+        'views/crm.xml',
     ],
     'demo': [],
     'test': [],
