@@ -27,7 +27,7 @@ class AccountInvoiceReport(models.Model):
         return super(AccountInvoiceReport, self)._from() + select_add_family
 
     def _select(self):
-        select_subtotal_usd = ",sub.dnk_price_subtotal_usd as dnk_price_subtotal_usd"
+        select_subtotal_usd = ",sub.dnk_price_subtotal_usd * (CASE WHEN sub.price_total < 0 THEN -1	ELSE 1 END) AS dnk_price_subtotal_usd"
         select_residual_usd = ",sub.dnk_residual_usd as dnk_residual_usd"
         select_family_color = ",sub.family as dnk_family , sub.color as dnk_color "
 
