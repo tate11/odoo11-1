@@ -7,9 +7,10 @@ class PurchaseOrderFile(models.Model):
 
     @api.model
     def action_confirm(self):
+        res =super(PurchaseOrderFile, self).action_confirm()
         if self.partner_id.dnk_purchase_order_required and not self.dnk_purchase_order_file:
             raise ValidationError("The settings for this client requires a purchase order file.")
-        return super(PurchaseOrderFile, self).action_confirm()
+        return res
 
 
     dnk_purchase_order_name = fields.Char('- Purchase Order Name')

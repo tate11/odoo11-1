@@ -20,7 +20,7 @@ class AttacchPurchaseOrderFile(models.Model):
     @api.model
     def postprocess_pdf_report(self, record, buffer):
         res = super(AttacchPurchaseOrderFile,self).postprocess_pdf_report(record, buffer)
-
+        print ("Muero aquí en postprocess_pdf_report?")
         if record.partner_id.dnk_attach_purchase_order and record.dnk_purchase_order_file and record.dnk_purchase_order_name:
             order_attachment_vals= {
                 'res_name': record.name,
