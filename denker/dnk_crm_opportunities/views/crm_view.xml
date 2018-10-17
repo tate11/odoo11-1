@@ -17,6 +17,9 @@
             <xpath expr="//field[@name='planned_revenue']" position="after">
                 <div>USD</div>
             </xpath>
+            <xpath expr="//field[@name='planned_revenue']" position="attributes">
+                  <attribute name="required">True</attribute>
+            </xpath>
             <xpath expr="//div[@class='o_row']" position="after">
                 <div class="o_row">
 			        <field name="company_currency" invisible="1" options="{'no_create': True, 'no_open': True}"/>
