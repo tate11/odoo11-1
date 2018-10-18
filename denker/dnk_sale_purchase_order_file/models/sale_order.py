@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 from odoo.exceptions import UserError, RedirectWarning, ValidationError
 
 class PurchaseOrderFile(models.Model):
@@ -12,5 +12,5 @@ class PurchaseOrderFile(models.Model):
     def action_confirm(self):
         res =super(PurchaseOrderFile, self).action_confirm()
         if self.partner_id.dnk_purchase_order_required and not self.dnk_purchase_order_name :
-            raise ValidationError("The settings for this client requires a purchase order file.")
+            raise ValidationError(_('The settings for this client requires a purchase order file.'))
         return res
