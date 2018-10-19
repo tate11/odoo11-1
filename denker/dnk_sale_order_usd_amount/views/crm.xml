@@ -33,7 +33,7 @@
         <field name="inherit_id" ref="sale_crm.crm_case_form_view_oppor" />
         <field name="arch" type="xml">
             <button name="495" position="attributes">
-                <attribute name="invisible">1</attribute>
+                <attribute name="invisible">True</attribute>
             </button>
         </field>
     </record>-->
