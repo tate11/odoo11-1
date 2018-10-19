@@ -24,6 +24,15 @@
                         - [dnk_family] - Family <br/>
                         - [dnk_color] - Color <br/>
                 </p>
+                <br/>
+                <br/>
+                    <b> [sale_crm.crm_case_form_view_oppor] Vista </b>
+                        Decidí mejor ocultar manualmente el botón de Orders,
+                        para no ocultar con una vista en xml.<br/>
+                        Cambié los atributos de<br/>
+                            attrs="{'invisible': [('sale_amount_total', '=', 0)]}"<br/>
+                        a<br/>
+                            attrs="{'invisible': True}"<br/><br/>
             </p>
         </div>
     </div>

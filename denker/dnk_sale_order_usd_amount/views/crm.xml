@@ -25,4 +25,16 @@
         </field>
     </record>
 
+    <!-- Mejor voy  a ocultar el botón manualmente -->
+    <!--
+    <record id="dnk_sale_crm_case_form_view_oppor_1" model="ir.ui.view">
+        <field name="name">dnk_sale_crm_case_form_view_oppor_1</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="sale_crm.crm_case_form_view_oppor" />
+        <field name="arch" type="xml">
+            <button name="495" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </button>
+        </field>
+    </record>-->
 </odoo>
