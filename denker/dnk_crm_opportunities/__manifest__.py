@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Denker - CRM Oportunidades",
+    'name': "Denker - CRM Opportunities",
 
     'summary': """
         Se gregan a las oportunidades campos adicionales como Familia y Subfamilia.

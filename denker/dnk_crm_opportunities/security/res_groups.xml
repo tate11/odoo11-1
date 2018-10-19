@@ -8,17 +8,17 @@
     </record>
 
     <record id="dnk_crm_user_group" model="res.groups">
-      <field name="name">- User</field>
+      <field name="name">User</field>
       <field name="comment">Sólo documentos propios</field>
       <field name="category_id" ref="dnk_crm_opportunities.dnk_crm_category"/>
     </record>
     <record id="dnk_crm_team_group" model="res.groups">
-      <field name="name">- Team</field>
+      <field name="name">Team</field>
       <field name="comment">Sólo Documentos del Equipo.</field>
       <field name="category_id" ref="dnk_crm_opportunities.dnk_crm_category"/>
     </record>
     <record id="dnk_crm_admin_group" model="res.groups">
-      <field name="name">- Admin</field>
+      <field name="name">Admin</field>
       <field name="comment">Todos los documentos.</field>
       <field name="category_id" ref="dnk_crm_opportunities.dnk_crm_category"/>
     </record>

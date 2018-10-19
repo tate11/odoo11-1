@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 from lxml import etree
+from odoo.exceptions import UserError, RedirectWarning, ValidationError
 
 class CRMLead(models.Model):
     _inherit = "crm.lead"
@@ -18,7 +19,7 @@ class CRMLead(models.Model):
                     if color:
                         parent_categ.append(color.id)
                 if parent_categ:
-                    node.set('domain', "[('parent_id', '=', "+str(parent_categ)+")]")
+                    node.set('domain', "[('parent_id', 'in', "+str(parent_categ)+")]")
         res['arch'] = etree.tostring(doc)
         return res
 
@@ -29,7 +30,15 @@ class CRMLead(models.Model):
     def _get_revenue(self):
         for lead in self:
             lead.planned_revenue = lead.dnk_price * lead.dnk_pieces
-    
+
+
+    @api.multi
+    def write(self, vals):
+        res = super(CRMLead, self).write(vals)
+        if self.dnk_price <= 0 or self.dnk_pieces <= 0:
+            raise ValidationError(_('The Price and Pieces must be greater than 0.'))
+        return res
+
 
     dnk_final_customer_id = fields.Many2one('res.partner','- Final Customer')
     dnk_is_vendor = fields.Boolean('- Is Vendor?')
