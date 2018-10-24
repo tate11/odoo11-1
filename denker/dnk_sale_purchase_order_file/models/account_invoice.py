@@ -14,6 +14,13 @@ class InvoicePurchaseOrderFile(models.Model):
         related='dnk_sale_order.dnk_purchase_order_file',
         readonly=True, store=False)
 
+    @api.multi
+    @api.onchange('dnk_purchase_order_name')
+    def update_name_ref(self):
+        for account in self:
+            if account.dnk_purchase_order_name:
+                account.name = account.dnk_purchase_order_name.lower().replace('.pdf','').upper()
+
 class AttacchPurchaseOrderFile(models.Model):
     _inherit =['ir.actions.report']
 
