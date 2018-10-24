@@ -63,6 +63,12 @@
             <xpath expr="//field[@name='tag_ids']" position="attributes">
                 <attribute name="required">True</attribute>
             </xpath>
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                  <attribute name="required">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='team_id']" position="attributes">
+                  <attribute name="required">True</attribute>
+            </xpath>
             <xpath expr="//field[@name='planned_revenue']" position="after">
                 <span class="oe_grey"> USD </span>
             </xpath>
@@ -119,16 +125,4 @@
         </field>
     </record>
 
-
-    <record id="dnk_crm_case_tree_view_oppor_1" model="ir.ui.view">
-        <field name="name">dnk_crm_case_tree_view_oppor_1</field>
-        <field name="model">crm.lead</field>
-        <field name="inherit_id" ref="crm.crm_case_tree_view_oppor" />
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='partner_id']" position="after">
-                  <field name="dnk_family_id" />
-                  <field name="dnk_subfamily_id" />
-            </xpath>
-        </field>
-   </record>
 </odoo>
