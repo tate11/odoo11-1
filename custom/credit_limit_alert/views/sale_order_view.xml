@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="credit_limit_alert_view_order_form" model="ir.ui.view">
+            <field name="name">credit.limit.alert.view.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <!-- Add your fields or attributes here -->
+                    <field name="permitted_credit_limit"/><!--<field name="permitted_credit_limit" attrs="{'invisible': [('partner_id.credit_limit', '=', 0)]}"/>-->
+                </xpath>
+                <xpath expr="//field[@name='payment_term_id']" position="attributes">
+                    <!-- Add your fields or attributes here -->
+                    <atribute name="required">1</atribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="credit_limit_alert_view_stock_picking" model="ir.ui.view">
+            <field name="name">credit_limit_alert_view_stock_picking</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <!-- Add your fields or attributes here -->
+                    <field name="allow_delivery"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
