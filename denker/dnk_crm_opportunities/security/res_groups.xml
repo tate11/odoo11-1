@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
   <data>
-    <record model="ir.module.category" id="dnk_crm_category">
-      <field name="name">- Denker CRM</field>
-      <field name="description">Categoría para los grupos CRM</field>
-      <field name="sequence">5</field>
-    </record>
-
     <record id="dnk_crm_user_group" model="res.groups">
       <field name="name">User</field>
       <field name="comment">Sólo documentos propios</field>
-      <field name="category_id" ref="dnk_crm_opportunities.dnk_crm_category"/>
+      <field name="category_id" ref="dnk_groups_categories.dnk_crm_category"/>
     </record>
     <record id="dnk_crm_team_group" model="res.groups">
       <field name="name">Team</field>
       <field name="comment">Sólo Documentos del Equipo.</field>
-      <field name="category_id" ref="dnk_crm_opportunities.dnk_crm_category"/>
+      <field name="category_id" ref="dnk_groups_categories.dnk_crm_category"/>
     </record>
     <record id="dnk_crm_admin_group" model="res.groups">
       <field name="name">Admin</field>
       <field name="comment">Todos los documentos.</field>
-      <field name="category_id" ref="dnk_crm_opportunities.dnk_crm_category"/>
+      <field name="category_id" ref="dnk_groups_categories.dnk_crm_category"/>
     </record>
 
     <record id="dnk_crm_rule_user" model="ir.rule">

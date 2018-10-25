@@ -8,7 +8,7 @@ class DnkRestrictSupplierPaymentTerm(models.Model):
     @api.multi
     def _check_account_group(self):
         for rec in self:
-            if self.env.user.has_group('dnk_accounting_groups.dnk_account_supplier_payment_term_admin') :
+            if self.env.user.has_group('dnk_account_restrict_supplier_payment_term.dnk_account_supplier_payment_term_admin') :
                 rec.dnk_mod_payment_term = True
             else :
                 rec.dnk_mod_payment_term = False

@@ -7,8 +7,9 @@
     "category": "Base",
     'summary': 'Módulo para restringir el plazo de pago del Proveedor.',
     "description": """ Módulo para restringir el plazo de pago del Proveedor.""",
-    'depends': ['base', 'dnk_accounting_groups'],
+    'depends': ['base'],
     'data': [
+        'views/res_groups.xml',
         'views/res_partner.xml',
     ],
     'demo': [],

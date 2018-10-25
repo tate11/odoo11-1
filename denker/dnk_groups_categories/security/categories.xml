@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="dnk_crm_category">
+            <field name="name">- Denker CRM</field>
+            <field name="description">Categoría para los grupos CRM</field>
+            <field name="sequence">5</field>
+        </record>
+        <record model="ir.module.category" id="dnk_accounting_category">
+            <field name="name">- Denker Accounting</field>
+            <field name="description">Categoría para los grupos de Contabilidad</field>
+            <field name="sequence">7</field>
+        </record>
+    </data>
+</odoo>
