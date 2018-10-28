@@ -15,7 +15,7 @@ class ProofOfDelivery(models.Model):
     def _set_image(self):
         for record in self:
             if record.dnk_img_proof_of_delivery == record.dnk_img_tmp_proof_of_delivery: continue
-            self.dnk_img_tmp_proof_of_delivery = tools.image_resize_image_big(self.dnk_img_proof_of_delivery)
+            self.dnk_img_tmp_proof_of_delivery = tools.image_resize_image_big(self.dnk_img_proof_of_delivery.encode())
             self.dnk_img_proof_of_delivery = self.dnk_img_tmp_proof_of_delivery
         return
 
@@ -24,3 +24,4 @@ class ProofOfDelivery(models.Model):
     dnk_img_proof_of_delivery = fields.Binary(string="- Proof Of Delivery", store=True, inverse="_set_image",
                             help="Medium-sized of proof of delivery image. It is automatically " \
                                  "resized, with aspect ratio preserved.")
+    dnk_img_proof_of_delivery_name = fields.Char('- Proof Of Delivery File Name')
