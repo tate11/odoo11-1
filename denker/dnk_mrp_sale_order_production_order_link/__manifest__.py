@@ -4,12 +4,12 @@
 # © 2016 Eficent Business and IT Consulting Services, S.L.
 # Copyright 2017 Serpent Consulting Services Pvt. Ltd.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-# -*- coding: utf-8 -*-
+
 {
-    'name': "Denker - Sale Order Commitment Date",
+    'name': "Sale Order / Production Order Link",
 
     'summary': """
-        Muestra el campo "Fecha de compromiso" al Reporte del Pedido (PDF).""",
+        Este módulo agrega un enlace en una Orden de Producción hacia un Pedido de Ventas y viceversa""",
 
     'author': "José Candelas",
     'website': "http://www.grupodenker.com",
@@ -21,14 +21,12 @@
     'version': '11.0.1.0',
 
     # any module necessary for this one to work correctly
-    'depends': ['sale', 'crm', 'dnk_sale_order_dates', 'dnk_sale_order_line_date'],
+    'depends': ['sale', 'mrp', 'dnk_sale_order_line_date', 'dnk_sale_order_line_menu'],
 
     # always loaded
     'data': [
-        'views/mail_commitment_date_template_data.xml',
-        'views/crm_team_views.xml',
-        'views/partner_views.xml',
-        'views/sale_report_templates.xml',
+        'views/mrp_production_view.xml',
+        'views/sale_order_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

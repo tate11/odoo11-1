@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="dnk_view_sale_order_line_tree" model="ir.ui.view">
+        <field name="name">dnk.view.sale.order.line.tree</field>
+        <field name="model">sale.order.line</field>
+        <field name="priority" eval="1"/>
+        <field name="sequence" eval="1"/>
+        <field name="arch" type="xml">
+            <tree string="Sale Orders Lines" create="false" delete="false">
+                <field name="order_id"/>
+                <field name="name"/>
+                <field name="product_uom_qty"/>
+                <field name="qty_delivered"/>
+                <field name="qty_invoiced"/>
+                <field name="product_uom"/>
+                <field name="price_unit" widget="monetary"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="price_subtotal" widget="monetary" groups="sale.group_show_price_subtotal"/>
+                <field name="state"/>
+                <field name="invoice_status"/>
+                <field name="salesman_id"/>
+                <field name="team_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="dnk_view_sale_order_line_form" model="ir.ui.view">
+        <field name="name">dnk.view.sale.order.line.form</field>
+        <field name="model">sale.order.line</field>
+        <field name="priority" eval="1"/>
+        <field name="sequence" eval="1"/>
+        <field name="arch" type="xml">
+            <form string="Sale Orders Lines" create="false" edit="true">
+              <sheet>
+                <group>
+                    <group>
+                        <field name="order_id"/>
+                        <field name="qty_invoiced" invisible="1"/>
+
+                        <field name="product_updatable" invisible="1"/>
+                        <field name="product_id" context="{'partner_id':order_id.partner_id, 'quantity':product_uom_qty, 'pricelist':order_id.pricelist_id, 'uom':product_uom, 'company_id': order_id.company_id}" attrs="{'readonly': [('product_updatable', '=', False)]}" force_save="1"/>
+                        <field name="layout_category_id" groups="sale.group_sale_layout"/>
+                        <field name="invoice_status" invisible="1"/>
+                        <field name="qty_to_invoice" invisible="1"/>
+                        <field name="qty_delivered_updateable" invisible="1"/>
+                        <field name="price_subtotal" invisible="1"/>
+                        <label for="product_uom_qty" string="Ordered Quantity"/>
+                        <div>
+                            <field context="{'partner_id':order_id.partner_id, 'quantity':product_uom_qty, 'pricelist':order_id.pricelist_id, 'uom':product_uom, 'uom_qty_change':True, 'company_id': order_id.company_id}" name="product_uom_qty" class="oe_inline"/>
+                            <field name="product_uom" groups="product.group_uom" class="oe_inline oe_no_button" attrs="{'readonly': [('state', 'in', ('sale','done', 'cancel'))]}"/>
+                        </div>
+                        <label for="qty_delivered" string="Delivered Quantity" attrs="{'invisible': [('state', 'not in', ['sale', 'done'])]}"/>
+                        <div attrs="{'invisible': [('state', 'not in', ['sale', 'done'])]}">
+                            <field name="qty_delivered" attrs="{'readonly': [('qty_delivered_updateable', '=', False)]}"/>
+                        </div>
+                        <label for="qty_invoiced" string="Invoiced Quantity" attrs="{'invisible': [('state', 'not in', ['sale', 'done'])]}"/>
+                        <div attrs="{'invisible': [('state', 'not in', ['sale', 'done'])]}">
+                            <field name="qty_invoiced" attrs="{'invisible': [('state', 'not in', ['sale', 'done'])]}"/>
+                        </div>
+                        <field name="price_unit"/>
+                        <label for="discount" groups="sale.group_discount_per_so_line"/>
+                        <div name="discount" groups="sale.group_discount_per_so_line">
+                            <field name="discount" class="oe_inline"/> %
+                        </div>
+                    </group>
+                    <group>
+                        <field name="tax_id" widget="many2many_tags" options="{'no_create': True}" domain="[('type_tax_use','=','sale'),('company_id','=',order_id.company_id)]" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
+                        <label for="customer_lead"/>
+                        <div>
+                            <field name="customer_lead" class="oe_inline"/> days
+                        </div>
+                        <label for="analytic_tag_ids" groups="analytic.group_analytic_accounting"/>
+                        <div>
+                            <field name="analytic_tag_ids" widget="many2many_tags" groups="analytic.group_analytic_accounting" options="{'color_field': 'color'}"/>
+                        </div>
+                        <label for="team_id"/>
+                        <div>
+                            <field name="team_id"/>
+                        </div>
+                    </group>
+                </group>
+                <label for="name"/>
+                <field name="name"/>
+                <div groups="base.group_no_one">
+                    <label for="invoice_lines"/>
+                    <field name="invoice_lines"/>
+                </div>
+                <field name="state" invisible="1"/>
+              </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="dnk_view_sale_order_line_pivot" model="ir.ui.view">
+      <field name="name">dnk.view.sale.order.line.pivot</field>
+      <field name="model">sale.order.line</field>
+      <field name="arch" type="xml">
+        <pivot string="Sale Orders Lines">
+          <field name="team_id" type="col" />
+          <field name="requested_date" interval="month" type="row" />
+        </pivot>
+      </field>
+    </record>
+
+    <record id="dnk_view_sale_order_line_filter" model="ir.ui.view">
+        <field name="name">dnk.view.sale.order.line.select</field>
+        <field name="model">sale.order.line</field>
+        <field name="arch" type="xml">
+            <search string="Sale Orders Lines">
+                <field name="name" string="Product" filter_domain="[('name','ilike',self)]"/>
+           </search>
+        </field>
+    </record>
+
+    <record id="action_sale_order_line" model="ir.actions.act_window">
+        <field name="name">Sale Orders Lines</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order.line</field>
+        <field name="context">{}</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,pivot</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create a Quotation, the first step of a new sale.
+            </p><p>
+                Once the quotation is confirmed, it becomes a Sport league.
+                You'll be able to invoice it and collect payments.
+                From the <i>Quotation</i> menu, you can track delivery
+                orders or services.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_sale_order_line_tree" model="ir.actions.act_window.view">
+        <field eval="1" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="dnk_sale_order_line_menu.dnk_view_sale_order_line_tree"/>
+        <field name="act_window_id" ref="action_sale_order_line"/>
+    </record>
+
+    <record id="action_sale_order_line_form" model="ir.actions.act_window.view">
+        <field eval="3" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="dnk_sale_order_line_menu.dnk_view_sale_order_line_form"/>
+        <field name="act_window_id" ref="action_sale_order_line"/>
+    </record>
+
+    <record id="action_sale_order_line_pivot" model="ir.actions.act_window.view">
+        <field eval="3" name="sequence"/>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="dnk_sale_order_line_menu.dnk_view_sale_order_line_pivot"/>
+        <field name="act_window_id" ref="action_sale_order_line"/>
+    </record>
+
+    <menuitem action="action_sale_order_line" name="Sale Orders Lines"
+        id="menu_sale_order_line" parent="sale.sale_order_menu"
+        sequence="40"/> <!-- groups="sport_tournament.group_pos_loyalty_agreement_partner"/> -->
+
+</odoo>
