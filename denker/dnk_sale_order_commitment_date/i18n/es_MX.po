@@ -1,0 +1,216 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* dnk_sale_order_commitment_date
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-17 17:09+0000\n"
+"PO-Revision-Date: 2018-10-17 17:09+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: dnk_sale_order_commitment_date
+#: model:mail.template,body_html:dnk_sale_order_commitment_date.dnk_commitment_date_email_template_edi_sale
+msgid "\n"
+"<p>Dear ${object.partner_id.name}\n"
+"% set access_action = object.with_context(force_website=True).get_access_action()\n"
+"% set is_online = access_action and access_action['type'] == 'ir.actions.act_url'\n"
+"% set doc_name = 'quotation' if object.state in ('draft', 'sent') else 'order'\n"
+"% set pay_sign_name =  object.get_portal_confirmation_action()\n"
+"% set access_name = is_online and object.state in ('draft', 'sent') and pay_sign_name in ('pay', 'sign') and 'Accept and %s online' % pay_sign_name or 'View %s' % doc_name\n"
+"% set access_url = is_online and object.get_mail_url() or ''\n"
+"\n"
+"\n"
+"% if object.partner_id.parent_id:\n"
+"    (<i>${object.partner_id.parent_id.name}</i>)\n"
+"% endif\n"
+",</p>\n"
+"<p>\n"
+"The <strong>Commitment Date</strong> in ${doc_name} <strong>${object.name}</strong>\n"
+"\n"
+"% if object.origin:\n"
+"(with reference: ${object.origin} )\n"
+"% endif\n"
+"has been changed from <strong>${object.dnk_original_commitment_date}</strong> to <strong>${object.commitment_date}</strong>.\n"
+"</p>\n"
+"\n"
+"<p>We apologize for any inconvenience this may cause.</p>\n"
+"\n"
+"<!--\n"
+"% if is_online and not ctx.get('proforma'):\n"
+"    <br/><br/>\n"
+"    <center>\n"
+"        <a href=\"${access_url}\" style=\"background-color: #1abc9c; padding: 20px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 16px;\" class=\"o_default_snippet_text\">${access_name}</a>\n"
+"        <br/><br/><br/>\n"
+"        <span style=\"color:#888888\">(or view attached PDF)</span>\n"
+"    </center>\n"
+"    <br/>\n"
+"% endif\n"
+"-->\n"
+"\n"
+"<p>You can reply to this email if you have any questions.</p>\n"
+"<p>Thank you,</p>\n"
+"\n"
+"<p style=\"color:#888888;\">\n"
+"% if object.user_id and object.user_id.signature:\n"
+"    ${object.user_id.signature | safe}\n"
+"% endif\n"
+"</p>\n"
+"\n"
+"            "
+msgstr "\n"
+"<p>Dear ${object.partner_id.name}\n"
+"% set access_action = object.with_context(force_website=True).get_access_action()\n"
+"% set is_online = access_action and access_action['type'] == 'ir.actions.act_url'\n"
+"% set doc_name = 'quotation' if object.state in ('draft', 'sent') else 'order'\n"
+"% set pay_sign_name =  object.get_portal_confirmation_action()\n"
+"% set access_name = is_online and object.state in ('draft', 'sent') and pay_sign_name in ('pay', 'sign') and 'Accept and %s online' % pay_sign_name or 'View %s' % doc_name\n"
+"% set access_url = is_online and object.get_mail_url() or ''\n"
+"\n"
+"\n"
+"% if object.partner_id.parent_id:\n"
+"    (<i>${object.partner_id.parent_id.name}</i>)\n"
+"% endif\n"
+",</p>\n"
+"<p>\n"
+"The <strong>Commitment Date</strong> in ${doc_name} <strong>${object.name}</strong>\n"
+"\n"
+"% if object.origin:\n"
+"(with reference: ${object.origin} )\n"
+"% endif\n"
+"has been changed from <strong>${object.dnk_original_commitment_date}</strong> to <strong>${object.commitment_date}</strong>.\n"
+"</p>\n"
+"\n"
+"<p>We apologize for any inconvenience this may cause.</p>\n"
+"\n"
+"<!--\n"
+"% if is_online and not ctx.get('proforma'):\n"
+"    <br/><br/>\n"
+"    <center>\n"
+"        <a href=\"${access_url}\" style=\"background-color: #1abc9c; padding: 20px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 16px;\" class=\"o_default_snippet_text\">${access_name}</a>\n"
+"        <br/><br/><br/>\n"
+"        <span style=\"color:#888888\">(or view attached PDF)</span>\n"
+"    </center>\n"
+"    <br/>\n"
+"% endif\n"
+"-->\n"
+"\n"
+"<p>You can reply to this email if you have any questions.</p>\n"
+"<p>Thank you,</p>\n"
+"\n"
+"<p style=\"color:#888888;\">\n"
+"% if object.user_id and object.user_id.signature:\n"
+"    ${object.user_id.signature | safe}\n"
+"% endif\n"
+"</p>\n"
+"\n"
+"            "
+
+#. module: dnk_sale_order_commitment_date
+#: model:mail.template,subject:dnk_sale_order_commitment_date.dnk_commitment_date_email_template_edi_sale
+msgid "${object.company_id.name} ${object.state in ('draft', 'sent') and 'Quotation' or 'Order'} (Ref ${object.name or 'n/a' })"
+msgstr "${object.company_id.name} ${object.state in ('draft', 'sent') and  'Presupuesto' or 'Pedido'} (Ref ${object.name or 'n/a' })"
+
+#. module: dnk_sale_order_commitment_date
+#: model:ir.model.fields,field_description:dnk_sale_order_commitment_date.field_crm_team_dnk_abbreviation
+msgid "- Abbreviation"
+msgstr "- Abreviación"
+
+#. module: dnk_sale_order_commitment_date
+#: model:ir.model.fields,field_description:dnk_sale_order_commitment_date.field_sale_order_dnk_original_commitment_date
+msgid "- Commitment Date"
+msgstr "- Fecha Compromiso"
+
+#. module: dnk_sale_order_commitment_date
+#: model:ir.model.fields,field_description:dnk_sale_order_commitment_date.field_res_partner_dnk_recommitment_notification
+#: model:ir.model.fields,field_description:dnk_sale_order_commitment_date.field_res_users_dnk_recommitment_notification
+msgid "- Recommitment Notification"
+msgstr "- Notificación de Reconfirmación"
+
+#. module: dnk_sale_order_commitment_date
+#: model:ir.model.fields,field_description:dnk_sale_order_commitment_date.field_crm_team_dnk_transit_days
+msgid "- Transit Days"
+msgstr "- Días de Tránsito"
+
+#. module: dnk_sale_order_commitment_date
+#: model:ir.ui.view,arch_db:dnk_sale_order_commitment_date.dnk_report_saleorder_document_commitment_date
+msgid "<strong>Commitment Date:</strong>"
+msgstr "<strong>Fecha Compromiso:</strong>"
+
+#. module: dnk_sale_order_commitment_date
+#: model:ir.model.fields,help:dnk_sale_order_commitment_date.field_crm_team_dnk_abbreviation
+msgid "Abbreviation"
+msgstr "Abreviación"
+
+#. module: dnk_sale_order_commitment_date
+#: model:ir.model.fields,field_description:dnk_sale_order_commitment_date.field_sale_order_dnk_commitment_date_changed
+msgid "Commitment Date Changed?"
+msgstr "¿Ha cambiado la Fecha Compromiso?"
+
+#. module: dnk_sale_order_commitment_date
+#: code:addons/dnk_sale_order_commitment_date/models/sale_order.py:50
+#, python-format
+msgid "Commitment date has been changed!"
+msgstr "Fecha Compromiso ha sido cambiada!"
+
+#. module: dnk_sale_order_commitment_date
+#: model:ir.model,name:dnk_sale_order_commitment_date.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: dnk_sale_order_commitment_date
+#: model:ir.model.fields,help:dnk_sale_order_commitment_date.field_crm_team_dnk_transit_days
+msgid "Days elapsed when the package arrives at the branch"
+msgstr "Días transcurridos cuando el paquete llega a la sucursal."
+
+#. module: dnk_sale_order_commitment_date
+#: model:ir.model.fields,help:dnk_sale_order_commitment_date.field_res_partner_dnk_recommitment_notification
+#: model:ir.model.fields,help:dnk_sale_order_commitment_date.field_res_users_dnk_recommitment_notification
+msgid "If checked, every change of \"Recommitment Date\" a mail notification is sent to the customer"
+msgstr "Si se marca, en cada cambio de "Fecha Compromiso" se enviará una notificación de correo al cliente."
+
+#. module: dnk_sale_order_commitment_date
+#: model:ir.model.fields,help:dnk_sale_order_commitment_date.field_sale_order_dnk_original_commitment_date
+msgid "Once the Sale Oder was confirmed this field can be modified but only if a notification is sent to the customer."
+msgstr "Una vez que se confirmó el pedido de venta, este campo se puede modificar, pero solo si se envía una notificación al cliente."
+
+#. module: dnk_sale_order_commitment_date
+#: code:addons/dnk_sale_order_commitment_date/models/sale_order.py:89
+#, python-format
+msgid "Please modify the Requested Date of \"\" product."
+msgstr "Favor de modificar la Fecha Compromiso del producto \"\"."
+
+#. module: dnk_sale_order_commitment_date
+#: model:ir.model,name:dnk_sale_order_commitment_date.model_sale_order
+msgid "Quotation"
+msgstr "Presupuesto"
+
+#. module: dnk_sale_order_commitment_date
+#: model:ir.model,name:dnk_sale_order_commitment_date.model_crm_team
+msgid "Sales Channel"
+msgstr "Canal de ventas"
+
+#. module: dnk_sale_order_commitment_date
+#: model:ir.model,name:dnk_sale_order_commitment_date.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Línea de pedido de venta"
+
+#. module: dnk_sale_order_commitment_date
+#: code:addons/dnk_sale_order_commitment_date/models/sale_order.py:51
+#, python-format
+msgid "The commitment date has been changed. The customer is going to be notified automatically at saving the Order."
+msgstr "La Fecha Compromiso ha sido cambiada. El cliente será notificado automáticamente al guardar el pedido."
+
+#. module: dnk_sale_order_commitment_date
+#: code:addons/dnk_sale_order_commitment_date/models/sale_order.py:88
+#, python-format
+msgid "You cannot delivering before the Product Lead Time plus Transit Days of the Sales Channel.\n"
+""
+msgstr "Usted no puede entregar antes del Plazo de Entrega del producto más los Días de Tránsito del Canal de Ventas.\n"
+""

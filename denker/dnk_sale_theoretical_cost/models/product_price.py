@@ -10,7 +10,7 @@ class PricelistItem(models.Model):
     base = fields.Selection([
         ('list_price', 'Public Price'),
         ('standard_price', 'Cost'),
-        ('dnk_theoretical_cost', 'Theoretical Cost'),
+        ('dnk_theoretical_cost_converted', 'Theoretical Cost'),
         ('pricelist', 'Other Pricelist')], "Based on",
         default='list_price', required=True,
         help='Base price for computation.\n'

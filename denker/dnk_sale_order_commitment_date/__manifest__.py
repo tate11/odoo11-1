@@ -21,7 +21,7 @@
     'version': '11.0.1.0',
 
     # any module necessary for this one to work correctly
-    'depends': ['sale', 'crm', 'sale_order_dates', 'sale_order_line_date'],
+    'depends': ['sale', 'crm', 'dnk_sale_order_dates', 'dnk_sale_order_line_date'],
 
     # always loaded
     'data': [
