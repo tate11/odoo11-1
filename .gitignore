@@ -4,4 +4,4 @@ denker/*/report/__pycache__
 custom/*/models/__pycache__
 custom/*/report/__pycache__
 custom/*/wizard/__pycache__
-
+*.pyc
