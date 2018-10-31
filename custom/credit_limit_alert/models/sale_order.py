@@ -1,20 +1,34 @@
 from odoo import models, fields, api, exceptions,_
+from datetime import datetime, date, time, timedelta
+import calendar
 
 class CreditLimitAlertSaleOrder(models.Model):
     _name = 'sale.order'
     _inherit = 'sale.order'
 
     permitted_credit_limit = fields.Boolean('Limite de credito excedido permitido', default=False)
+    paid_sale_order = fields.Boolean('Pedido Pagado', default=False)
 
     @api.one
     @api.multi
     def action_confirm(self):
-
+        current_date = date.today() - timedelta(days=15)
         cr = self.env.cr
-        cr.execute("select COALESCE(SUM(1),0) FROM account_invoice WHERE type='out_invoice' AND state='open' AND date_due<DATE(NOW()) AND partner_id='"+str(self.partner_id.id)+"'")
+        cr.execute("select COALESCE(SUM(1),0) FROM account_invoice WHERE type='out_invoice' AND state='open' AND date_due<='"+str(current_date)+"' AND partner_id='"+str(self.partner_id.id)+"'")
         facturas_vencidas = cr.fetchone()
         fac = max(facturas_vencidas)
-        if fac >= 1 and self.payment_term_id.name != 'Immediate Payment' and self.permitted_credit_limit is not True:
+
+
+        if self.partner_id.block_sales==True:
+            raise exceptions.ValidationError('El cliente tiene bloqueadas las ventas')
+
+        if not self.payment_term_id:
+            raise exceptions.ValidationError('Necesita seleccionar un plazo de pago.')
+
+        if (self.payment_term_id.id==1 and self.paid_sale_order!=True):
+            raise exceptions.ValidationError('Si el pago es inmediato necesita validar que esta orden esté pagada')
+
+        if (fac >= 1 and self.payment_term_id.id != 1 and self.permitted_credit_limit is not True):
             raise exceptions.ValidationError('Este cliente cuenta con facturas vencidas.')
         else:
 
@@ -43,8 +57,9 @@ class CreditLimitAlertStockPicking(models.Model):
     @api.multi
     def button_validate(self):
         self.ensure_one()
+        current_date = date.today() - timedelta(days=15)
         cr = self.env.cr
-        cr.execute("select COALESCE(SUM(1),0) FROM account_invoice WHERE type='out_invoice' AND state='open' AND date_due<DATE(NOW()) AND partner_id='"+str(self.partner_id.id)+"'")
+        cr.execute("select COALESCE(SUM(1),0) FROM account_invoice WHERE type='out_invoice' AND state='open' AND date_due<='"+str(current_date)+"' AND partner_id='"+str(self.partner_id.id)+"'")
         facturas_vencidas = cr.fetchone()
         fac = max(facturas_vencidas)
         if fac >= 1 and self.allow_delivery is not True:

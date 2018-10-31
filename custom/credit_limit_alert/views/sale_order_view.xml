@@ -9,7 +9,9 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='payment_term_id']" position="after">
                     <!-- Add your fields or attributes here -->
-                    <field name="permitted_credit_limit"/><!--<field name="permitted_credit_limit" attrs="{'invisible': [('partner_id.credit_limit', '=', 0)]}"/>-->
+                    <field name="permitted_credit_limit"/>
+                    <field name="paid_sale_order" />
+                    <!--<field name="permitted_credit_limit" attrs="{'invisible': [('partner_id.credit_limit', '=', 0)]}"/>-->
                 </xpath>
                 <xpath expr="//field[@name='payment_term_id']" position="attributes">
                     <!-- Add your fields or attributes here -->

@@ -6,6 +6,7 @@ class CreditLimitAlertResPartner(models.Model):
 
     credit_limit = fields.Monetary('Limite de credito')
     credit_available = fields.Monetary('Cedito disponible', compute='_compute_amount_credit_available')
+    block_sales = fields.Boolean('Bloquear Ventas', default=False)
 
     @api.one
     @api.depends('credit_limit','credit_available','credit')
