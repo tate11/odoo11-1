@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <record id="crm_case_form_view_oppor_pd" model="ir.ui.view">
         <field name="name">crm.lead.form.opportunity.pd</field>
         <field name="model">crm.lead</field>
@@ -25,23 +26,18 @@
             </xpath>
         </field>
     </record>
-    
-    
+
     <record id="view_create_opportunity_simplified_dnkp" model="ir.ui.view">
         <field name="name">crm.lead.form.simple.dnkp</field>
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.view_create_opportunity_simplified" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='product_id']" position="after">
+            <xpath expr="//field[@name='dnk_product_id']" position="after">
                   <field name="piezas_por_producto" />
                   <field name="precio_por_pieza" />
             </xpath>
-            
+
         </field>
     </record>
-    
-    
-    
-    
-    
+
 </odoo>

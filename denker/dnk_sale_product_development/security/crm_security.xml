@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="dnk_group_product_development_sales_person" model="res.groups">
+            <field name="name">Product Deveopment Sales Person</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="category_id" ref="dnk_groups_categories.dnk_accounting_category"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+
+        <record id="dnk_group_product_development_product_designer" model="res.groups">
+            <field name="name">Product Deveopment Product Designer</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="category_id" ref="dnk_groups_categories.dnk_accounting_category"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+    </data>
+</odoo>

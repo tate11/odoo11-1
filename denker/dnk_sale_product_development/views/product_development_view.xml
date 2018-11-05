@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-
     <record id="view_pd_stage_tree" model="ir.ui.view">
          <field name="name">pd.stage.tree</field>
          <field name="model">pd.stage</field>
@@ -13,10 +12,9 @@
                  <field name="fold"/>
              </tree>
          </field>
-     </record>
+    </record>
 
-
-     <record id="view_pd_stage_form" model="ir.ui.view">
+    <record id="view_pd_stage_form" model="ir.ui.view">
          <field name="name">pd.stage.form</field>
          <field name="model">pd.stage</field>
          <field name="arch" type="xml">
@@ -30,20 +28,17 @@
              </sheet>
              </form>
          </field>
-     </record>
+    </record>
 
-     <record model="ir.actions.act_window" id="pd_stage_action">
-            <field name="name">Product Development Stage</field>
-            <field name="res_model">pd.stage</field>
-            <field name="view_mode">tree,form</field>
-            <field name="domain">[]</field>
-        </record>
+    <record model="ir.actions.act_window" id="pd_stage_action">
+        <field name="name">Product Development Stage</field>
+        <field name="res_model">pd.stage</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+    </record>
 
-        <menuitem action="pd_stage_action" id="menu_pd_stage_action"
-            parent="sale.prod_config_main" sequence="50" />
-
-
-
+    <menuitem action="pd_stage_action" id="menu_pd_stage_action"
+        parent="sale.prod_config_main" sequence="50" />
 
     <record id="view_dp_estilo_tree" model="ir.ui.view">
          <field name="name">dp_estilo.tree</field>
@@ -53,10 +48,9 @@
                  <field name="name" />
              </tree>
          </field>
-     </record>
+    </record>
 
-
-     <record id="view_dp_estilo_form" model="ir.ui.view">
+    <record id="view_dp_estilo_form" model="ir.ui.view">
          <field name="name">dp_estilo.form</field>
          <field name="model">dp.form.estilo</field>
          <field name="arch" type="xml">
@@ -68,19 +62,17 @@
              </sheet>
              </form>
          </field>
-     </record>
+    </record>
 
-     <record model="ir.actions.act_window" id="dp_estilo_action">
-            <field name="name">Estilo</field>
-            <field name="res_model">dp.form.estilo</field>
-            <field name="view_mode">tree,form</field>
-            <field name="domain">[]</field>
-        </record>
+      <record model="ir.actions.act_window" id="dp_estilo_action">
+          <field name="name">Estilo</field>
+          <field name="res_model">dp.form.estilo</field>
+          <field name="view_mode">tree,form</field>
+          <field name="domain">[]</field>
+      </record>
 
-        <menuitem action="dp_estilo_action" id="menu_dp_estilo_action"
-            parent="sale.prod_config_main" sequence="60" />
-
-
+      <menuitem action="dp_estilo_action" id="menu_dp_estilo_action"
+          parent="sale.prod_config_main" sequence="60" />
 
       <record id="view_dp_aditamentos_tree" model="ir.ui.view">
          <field name="name">dp_aditamentos.tree</field>
@@ -91,7 +83,6 @@
              </tree>
          </field>
      </record>
-
 
      <record id="view_dp_aditamentos_form" model="ir.ui.view">
          <field name="name">dp_aditamentos.form</field>
@@ -107,38 +98,33 @@
          </field>
      </record>
 
-     <record model="ir.actions.act_window" id="dp_aditamentos_action">
-            <field name="name">Aditamentos</field>
-            <field name="res_model">dp.form.aditamentos</field>
-            <field name="view_mode">tree,form</field>
-            <field name="domain">[]</field>
-        </record>
+   <record model="ir.actions.act_window" id="dp_aditamentos_action">
+      <field name="name">Aditamentos</field>
+      <field name="res_model">dp.form.aditamentos</field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">[]</field>
+  </record>
 
-        <menuitem action="dp_aditamentos_action" id="menu_dp_aditamentos_action"
-            parent="sale.prod_config_main" sequence="70" />
-
-
-
-
+  <menuitem action="dp_aditamentos_action" id="menu_dp_aditamentos_action"
+      parent="sale.prod_config_main" sequence="70" />
 
 	<record id="view_pd_tree" model="ir.ui.view">
-         <field name="name">pd.tree</field>
-         <field name="model">product.development</field>
-         <field name="arch" type="xml">
-             <tree string="Product Development">
-                 <field name="name" />
-                 <field name= "opp_id" />
-                 <field name="family_id"/>
-                 <field name="partner_id"/>
-                 <field name="final_customer_id"/>
-                 <field name="planned_revenue" sum="Total"/>
-                 <field name="contact_name" />
-                 <field name="user_id" />
-                 <field name="stage_id"/>
-             </tree>
-         </field>
-     </record>
-
+     <field name="name">pd.tree</field>
+     <field name="model">product.development</field>
+     <field name="arch" type="xml">
+         <tree string="Product Development">
+             <field name="name" />
+             <field name= "opp_id" />
+             <field name="dnk_family_id"/>
+             <field name="partner_id"/>
+             <field name="dnk_final_customer_id"/>
+             <field name="planned_revenue" sum="Total"/>
+             <field name="contact_name" />
+             <field name="user_id" />
+             <field name="stage_id"/>
+         </tree>
+     </field>
+   </record>
 
      <record id="view_pd_form" model="ir.ui.view">
          <field name="name">pd.form</field>
@@ -161,10 +147,10 @@
                 <group string="DATOS GENERALES" col="4">
                      <field name="name" readonly="1"/>
                      <field name="opp_id" readonly="1"/>
-	                 <field name="family_id" readonly="1" />
-	                 <field name="familysub_id" options="{'no_create': True}" domain="[('id','child_of',family_id),('id','!=',family_id)]" attrs="{'readonly': [('familysub_id','!=',False)]}" />
+	                 <field name="dnk_family_id" readonly="1" />
+	                 <field name="dnk_subfamily_id" options="{'no_create': True}" domain="[('id','child_of',dnk_family_id),('id','!=',dnk_family_id)]" attrs="{'readonly': [('dnk_subfamily_id','!=',False)]}" />
 	                 <field name="partner_id" readonly="1"/>
-	                 <field name="final_customer_id" readonly="1"/>
+	                 <field name="dnk_final_customer_id" readonly="1"/>
 	                 <field name="planned_revenue" sum="Total" readonly="1"/>
 	                 <field name="contact_name" readonly="1"/>
 	                 <field name="user_id" readonly="1"/>
@@ -239,7 +225,7 @@
                 </group>
                 <group string="Detalles" attrs="{'invisible': [('dp_form_type','=','flexinnova')]}">
                     <group>
-	                    <!--<field name="product_id" domain="[('categ_id','=',familysub_id)]" attrs="{'invisible': [('dp_form_type','in',('extrupac','flexinnova'))]}"/>-->
+	                    <!--<field name="dnk_product_id" domain="[('categ_id','=',dnk_subfamily_id)]" attrs="{'invisible': [('dp_form_type','in',('extrupac','flexinnova'))]}"/>-->
 	                    <field name="serie"  attrs="{'invisible': [('dp_form_type','!=','extrupac')],'required': [('dp_form_type','=','extrupac')]}"/>
 	                    <field name="estilo"  attrs="{'invisible': [('dp_form_type','!=','extrupac')],'required': [('dp_form_type','=','extrupac')]}"/>
 	                    <field name="albertura"  attrs="{'invisible': [('dp_form_type','!=','extrupac')],'required': [('dp_form_type','=','extrupac')]}"/>
@@ -298,10 +284,10 @@
                 <group string="DATOS GENERALES" col="4">
                      <field name="name" readonly="1"/>
                      <field name="opp_id" invisible="1"/>
-                     <field name="family_id" readonly="1"/>
-                     <field name="familysub_id" options="{'no_create': True}" attrs="{'readonly': [('familysub_id','!=',False)]}" domain="[('id','child_of',family_id),('id','!=',family_id)]" />
+                     <field name="dnk_family_id" readonly="1"/>
+                     <field name="dnk_subfamily_id" options="{'no_create': True}" attrs="{'readonly': [('dnk_subfamily_id','!=',False)]}" domain="[('id','child_of',dnk_family_id),('id','!=',dnk_family_id)]" />
                      <field name="partner_id" readonly="1"/>
-                     <field name="final_customer_id" readonly="1"/>
+                     <field name="dnk_final_customer_id" readonly="1"/>
                      <field name="planned_revenue" sum="Total" readonly="1"/>
                      <field name="contact_name" readonly="1"/>
                      <field name="user_id" readonly="1"/>
@@ -377,7 +363,7 @@
                 </group>
                 <group string="Detalles" attrs="{'invisible': [('dp_form_type','=','flexinnova')]}">
                     <group>
-                        <!--<field name="product_id" domain="[('categ_id','=',familysub_id)]" attrs="{'invisible': [('dp_form_type','in',('extrupac','flexinnova'))]}"/>-->
+                        <!--<field name="dnk_product_id" domain="[('categ_id','=',dnk_subfamily_id)]" attrs="{'invisible': [('dp_form_type','in',('extrupac','flexinnova'))]}"/>-->
                         <field name="serie" attrs="{'invisible': [('dp_form_type','!=','extrupac')], 'required': [('dp_form_type','=','extrupac')] }"/>
                         <field name="estilo"  attrs="{'invisible': [('dp_form_type','!=','extrupac')], 'required': [('dp_form_type','=','extrupac')]}"/>
                         <field name="albertura"  attrs="{'invisible': [('dp_form_type','!=','extrupac')],'required': [('dp_form_type','=','extrupac')]}"/>
@@ -420,34 +406,33 @@
 		     </footer>
              </form>
          </field>
-     </record>
+    </record>
 
-
-     <record id="create_pd_simplified" model="ir.actions.act_window">
-            <field name="name">Create Product Development</field>
-            <field name="res_model">product.development</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">form</field>
-            <field name="view_id" ref="view_pd_form_simplied"/>
-            <field name="target">new</field>
-        </record>
+    <record id="create_pd_simplified" model="ir.actions.act_window">
+        <field name="name">Create Product Development</field>
+        <field name="res_model">product.development</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_pd_form_simplied"/>
+        <field name="target">new</field>
+    </record>
 
     <record id="dnk_search_product_develpment_view" model="ir.ui.view">
-           <field name="name">dnk_product_development_search_view</field>
-           <field name="model">product.development</field>
-           <field name="arch" type="xml">
-               <search>
-                   <field name="name"/>
-                   <field name="partner_id"/>
-                   <field name="user_id"/>
-                   <field name="nombre"/>
-                   <field name="family_id"/>
-                   <field name="team_id"/>
-                   <field name="date"/>
-                   <field name="date_deadline"/>
-		   <field name="final_code"/>
-               </search>
-           </field>
+       <field name="name">dnk_product_development_search_view</field>
+       <field name="model">product.development</field>
+       <field name="arch" type="xml">
+           <search>
+               <field name="name"/>
+               <field name="partner_id"/>
+               <field name="user_id"/>
+               <field name="nombre"/>
+               <field name="dnk_family_id"/>
+               <field name="team_id"/>
+               <field name="date"/>
+               <field name="date_deadline"/>
+               <field name="final_code"/>
+           </search>
+       </field>
      </record>
 
      <record id="pd_kanban" model="ir.ui.view">
@@ -458,9 +443,9 @@
                     <field name="stage_id" options='{"group_by_tooltip": {"description": "Stage Description"}}' />
                     <field name="opp_id" />
                     <field name="name" />
-                 <field name="family_id"/>
+                 <field name="dnk_family_id"/>
                  <field name="partner_id"/>
-                 <field name="final_customer_id"/>
+                 <field name="dnk_final_customer_id"/>
                  <field name="planned_revenue" sum="Total"/>
                  <field name="contact_name" />
                  <field name="user_id" />
@@ -490,7 +475,7 @@
                                         <t t-if="record.planned_revenue.raw_value"><field name="planned_revenue" /><span t-if="record.partner_id.value">,</span></t> <span t-if="record.partner_id.value"> <t t-esc="record.partner_id.value"/></span>
                                     </div>
                                     <div class="text-muted">
-                                        <b>Family :</b> <span t-if="record.family_id.raw_value"><t t-esc="record.family_id.value"/></span>
+                                        <b>Family :</b> <span t-if="record.dnk_family_id.raw_value"><t t-esc="record.dnk_family_id.value"/></span>
                                     </div>
                                     <div class="o_kanban_footer">
                                         <div>
@@ -506,14 +491,12 @@
             </field>
         </record>
 
-
         <record model="ir.actions.act_window" id="pd_action">
             <field name="name">Product Development</field>
             <field name="res_model">product.development</field>
             <field name="view_mode">kanban,tree,form</field>
             <field name="domain">[]</field>
         </record>
-
 
         <record model="ir.actions.act_window" id="pd_opp_action">
             <field name="name">Product Development</field>
@@ -522,9 +505,7 @@
             <field name="domain">[('opp_id', '=', active_id)]</field>
         </record>
 
-
         <menuitem action="pd_action" id="menu_pd_action"
-            parent="sales_team.menu_sales" sequence="500" />
-
+            parent="crm.crm_menu_pipeline" sequence="50" />
 
 </odoo>

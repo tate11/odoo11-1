@@ -5,12 +5,12 @@ from odoo.osv import expression
 from odoo.exceptions import UserError, AccessError
 import re
 
+
 class PDStage(models.Model):
     _name = "pd.stage"
     _description = "Stage of DP"
     _rec_name = 'name'
     _order = "sequence, name, id"
-
 
     name = fields.Char('Stage Name', required=True, translate=True)
     description = fields.Text(translate=True)
@@ -31,18 +31,16 @@ class DPFormAditamentos(models.Model):
     name = fields.Char('Name', required=True)
 
 
-class Serie(models.Model):
-    _name = 'serie'
+class DPSerie(models.Model):
+    _name = 'dp.serie'
 
     name = fields.Char('Name', required=True)
 
 
-
-
-
 class ProductDevelopment(models.Model):
     _name = "product.development"
-    _inherit = ['mail.thread', 'ir.needaction_mixin']
+    #_inherit = ['mail.thread', 'ir.needaction_mixin']
+    _inherit = ['mail.thread']
 
     def _default_opp_id(self):
         if self._context and self._context.get('active_model', False) == 'crm.lead':
@@ -58,21 +56,19 @@ class ProductDevelopment(models.Model):
 
     def _get_attachment(self):
         for rec in self:
-            attachment_search = self.env['ir.attachment'].search([('res_model','=','product.category'),('res_id','=',rec.family_id.id)])
-            print "----------attachment_search--------",attachment_search
+            attachment_search = self.env['ir.attachment'].search([('res_model','=','product.category'),('res_id','=',rec.dnk_family_id.id)])
+            print("----------attachment_search--------", attachment_search)
             rec.attachment_count = len(attachment_search)
 
 
-
     attachment_count = fields.Integer(string='# of Attachments', compute='_get_attachment', readonly=True)
-
     opp_id = fields.Many2one('crm.lead','Opp. Id', required=True, default=lambda self: self._default_opp_id(), track_visibility='onchange')
     name = fields.Char(string='Folio', index=True, readonly=True, default=lambda self: _('New'))
-    family_id = fields.Many2one('product.category',string='Family', related='opp_id.family_id', store=True, track_visibility='onchange')
-    familysub_id = fields.Many2one('product.category',string='SubFamily', related='opp_id.familysub_id', store=True, track_visibility='onchange')
-    dp_form_type = fields.Selection(related="family_id.dp_form_type",string="DP Form To Use", required=True)
-    familysub_id = fields.Many2one('product.category',string='SubFamily', related='opp_id.familysub_id', store=True, track_visibility='onchange')
-    final_customer_id = fields.Many2one('res.partner',string='Final Customer', related='opp_id.final_customer_id', store=True, track_visibility='onchange')
+    dnk_family_id = fields.Many2one('product.category',string='Family', related='opp_id.dnk_family_id', store=True, track_visibility='onchange')
+    dnk_subfamily_id = fields.Many2one('product.category',string='SubFamily', related='opp_id.dnk_subfamily_id', store=True, track_visibility='onchange')
+    dp_form_type = fields.Selection(related="dnk_family_id.dp_form_type",string="DP Form To Use", required=True)
+    dnk_subfamily_id = fields.Many2one('product.category',string='SubFamily', related='opp_id.dnk_subfamily_id', store=True, track_visibility='onchange')
+    dnk_final_customer_id = fields.Many2one('res.partner',string='Final Customer', related='opp_id.dnk_final_customer_id', store=True, track_visibility='onchange')
     partner_id = fields.Many2one('res.partner', string='Customer', related='opp_id.partner_id', store=True, track_visibility='onchange')
     contact_name = fields.Char(string='Contact Name', related='opp_id.contact_name', store=True, track_visibility='onchange')
     planned_revenue = fields.Float(string='Expected Revenue', related='opp_id.planned_revenue', store=True, track_visibility='onchange')
@@ -142,7 +138,7 @@ class ProductDevelopment(models.Model):
     pro_code = fields.Char("Código del Producto")
     lugar_enter = fields.Char("Lugar de Entrega")
     #form 2
-    product_id = fields.Many2one('product.product',string='Articulo', related='opp_id.product_id', store=True, track_visibility='onchange')
+    dnk_product_id = fields.Many2one('product.product',string='Articulo', related='opp_id.dnk_product_id', store=True, track_visibility='onchange')
 #     articilo = fields.Selection([('elija','Elija una opcion')], string="Articulo", track_visibility='onchange')
     um = fields.Boolean('UM are Inches', track_visibility='onchange')
     um_measure_unit = fields.Selection([('mm','mm'),('cm','cm'),('in','in')],'Unidade De Medida', track_visibility='onchange')
@@ -168,7 +164,7 @@ class ProductDevelopment(models.Model):
 
 
     #form 3
-    serie = fields.Many2one('serie','Serie')
+    serie = fields.Many2one('dp.serie','Serie')
     albertura = fields.Char("Abertura")
     altura = fields.Char("Altura")
     fuelle = fields.Char("Fuelle")
@@ -202,7 +198,7 @@ class ProductDevelopment(models.Model):
 
     @api.multi
     def action_open_attachment(self):
-        attachment_search = self.env['ir.attachment'].search([('res_model','=','product.category'),('res_id','=',self.family_id.id)])
+        attachment_search = self.env['ir.attachment'].search([('res_model','=','product.category'),('res_id','=',self.dnk_family_id.id)])
         action = self.env.ref('product_development.action_attachment_dnk').read()[0]
         if len(attachment_search) > 1:
 #             action['views'] = [(self.env.ref('base.view_attachment_tree').id, 'tree')]

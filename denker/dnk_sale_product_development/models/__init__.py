@@ -1,4 +1,4 @@
 # -*- coding: utf-8 -*-
-import product_development
-import crm
-import product_category
+from . import product_development
+from . import crm
+from . import product_category
