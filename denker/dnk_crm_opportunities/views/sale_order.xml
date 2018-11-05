@@ -8,7 +8,6 @@
             <xpath expr="//field[@name='user_id']" position="after">
                 <field name="dnk_opportunity_id" />
                 <field name="dnk_final_customer_id" />
-
             </xpath>
         </field>
     </record>

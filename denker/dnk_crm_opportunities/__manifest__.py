@@ -20,7 +20,7 @@
     'category': 'CRM',
     'version': '11.0.1.1',
     # any module necessary for this one to work correctly
-    'depends': ['base','crm','sale'],
+    'depends': ['base','crm','sale','sale.order','crm.lead'],
 
     # always loaded
     'data': [
