@@ -35,7 +35,7 @@ class CRMLead(models.Model):
     @api.multi
     def write(self, vals):
         res = super(CRMLead, self).write(vals)
-        if self.dnk_price <= 0 or self.dnk_pieces <= 0:
+        if  self.type == ('opportunity')  and (self.dnk_price <= 0 or self.dnk_pieces <= 0):
             raise ValidationError(_('The Price and Pieces must be greater than 0.'))
         return res
 
