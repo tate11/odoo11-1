@@ -20,13 +20,14 @@
     'category': 'CRM',
     'version': '11.0.1.1',
     # any module necessary for this one to work correctly
-    'depends': ['base', 'crm','sale'],
+    'depends': ['base','crm','sale'],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
         'views/crm_view.xml',
         'views/res_partner.xml',
+        #'views/sale_order.xml',
         'security/res_groups.xml',
         'security/ir.model.access.csv',
     ],

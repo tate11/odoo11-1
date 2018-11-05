@@ -10,6 +10,7 @@
                     <field name="credit"/>
                     <field name="credit_limit"/>
                     <field name="credit_available"/>
+                    <field name="block_sales" />
                 </xpath>
             </field>
         </record>
