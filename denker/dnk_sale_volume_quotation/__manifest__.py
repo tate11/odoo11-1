@@ -21,6 +21,7 @@
 
     # always loaded
     'data': [
+        'views/product_views.xml',
         'views/sale_order_line_views.xml',
         'views/sale_report_templates.xml',
         'views/sale_order_views.xml',
