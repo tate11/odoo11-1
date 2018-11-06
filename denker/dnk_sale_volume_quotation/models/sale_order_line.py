@@ -93,18 +93,19 @@ class SaleOrderLine(models.Model):
         str_prices = ''
         str_mininimum_quantity = ''
         unit_price = ""
-        for price in price_list:
-            if price.id and price.min_quantity:
-                # Marco: Usa esta función para extraer la precio de la tarifa pública de la siguiente manera:
-                # Comando para debuggear:
-                # sudo su - odoo9dev -c "/opt/odoo9dev/odoo/openerp-server --config /etc/odoo9dev/odoo.conf --dev"
-                # tarifa_publica = self.env['res.lang'].search([('name', '=', 'Nombre de la tarifa publica')])
-                # context_partner = dict(self.env.context, partner_id=order_id.partner_id.id, date=order_id.date_order)
-                # pricelist_context = dict(context_partner, uom=product_uom.id)
-                # tarifa_publica..with_context(pricelist_context).get_product_price_rule(product_id, price.min_quantity, order_id.partner_id)
-                unit_price, rule_id = order_id.pricelist_id.with_context(pricelist_context).get_product_price_rule(product_id, price.min_quantity, order_id.partner_id)
-                str_prices += self._formatLang(unit_price, show_currency=False) + "\n"
-                str_mininimum_quantity += '{:0,.0f}'.format(price.min_quantity) + "\n"
+        if product_id.dnk_volume_quotation:
+            for price in price_list:
+                if price.id and price.min_quantity:
+                    # Marco: Usa esta función para extraer la precio de la tarifa pública de la siguiente manera:
+                    # Comando para debuggear:
+                    # sudo su - odoo9dev -c "/opt/odoo9dev/odoo/openerp-server --config /etc/odoo9dev/odoo.conf --dev"
+                    # tarifa_publica = self.env['res.lang'].search([('name', '=', 'Nombre de la tarifa publica')])
+                    # context_partner = dict(self.env.context, partner_id=order_id.partner_id.id, date=order_id.date_order)
+                    # pricelist_context = dict(context_partner, uom=product_uom.id)
+                    # tarifa_publica..with_context(pricelist_context).get_product_price_rule(product_id, price.min_quantity, order_id.partner_id)
+                    unit_price, rule_id = order_id.pricelist_id.with_context(pricelist_context).get_product_price_rule(product_id, price.min_quantity, order_id.partner_id)
+                    str_prices += self._formatLang(unit_price, show_currency=False) + "\n"
+                    str_mininimum_quantity += '{:0,.0f}'.format(price.min_quantity) + "\n"
 
         # En caso de que el producto no se encuentre en la lista de precio, calcular el precio
         if unit_price == "":
@@ -127,7 +128,7 @@ class SaleOrderLine(models.Model):
         return(str_mininimum_quantity, str_prices)
 
 
-    @api.onchange('product_id')
+    @api.onchange('product_id', 'product_uom_qty')
     def _get_volume_prices(self):
         for sale_order_line in self:
             dnk_minimum_quantity, dnk_volume_prices = self._get_volume_prices_per_sale_line(sale_order_line.order_id, sale_order_line.product_id, self.product_uom, self.product_uom_qty, self.price_unit)
