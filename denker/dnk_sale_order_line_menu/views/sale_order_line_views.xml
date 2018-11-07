@@ -8,6 +8,7 @@
         <field name="arch" type="xml">
             <tree string="Sale Orders Lines" create="false" delete="false">
                 <field name="order_id"/>
+                <field name="order_partner_id"/>
                 <field name="name"/>
                 <field name="product_uom_qty"/>
                 <field name="qty_delivered"/>
@@ -15,10 +16,10 @@
                 <field name="product_uom"/>
                 <field name="price_unit" widget="monetary"/>
                 <field name="currency_id" invisible="1"/>
-                <field name="price_subtotal" widget="monetary" groups="sale.group_show_price_subtotal"/>
+                <!--<field name="price_subtotal" widget="monetary" groups="sale.group_show_price_subtotal"/>-->
                 <field name="state"/>
                 <field name="invoice_status"/>
-                <field name="salesman_id"/>
+                <!--<field name="salesman_id"/>-->
                 <field name="team_id"/>
             </tree>
         </field>
@@ -107,7 +108,30 @@
         <field name="model">sale.order.line</field>
         <field name="arch" type="xml">
             <search string="Sale Orders Lines">
-                <field name="name" string="Product" filter_domain="[('name','ilike',self)]"/>
+                <field name="name" string="Sales Order Line" filter_domain="['|','|',('name','ilike',self),('order_id.client_order_ref','ilike',self),('order_partner_id','child_of',self)]"/>
+                <field name="order_partner_id" operator="child_of"/>
+                <field name="salesman_id"/>
+                <field name="team_id" string="Sales Channel"/>
+                <field name="product_id"/>
+                <filter string="My Orders Lines" domain="[('salesman_id','=',uid)]" name="my_sale_orders_filter"/>
+                <separator/>
+                <filter string="Unread Messages" name="message_needaction" domain="[('order_id.message_needaction','=',True)]"/>
+                <separator/>
+                <filter string="My Activities" name="activities_my" domain="[('order_id.activity_ids.user_id', '=', uid)]"/>
+                <separator/>
+                <filter string="Late Activities" name="activities_overdue" domain="[('order_id.activity_ids.date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]" help="Show all records which has next action date is before today"/>
+                <filter string="Today Activities" name="activities_today" domain="[('order_id.activity_ids.date_deadline', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="Future Activities" name="activities_upcoming_all" domain="[('order_id.activity_ids.date_deadline', '&gt;', context_today().strftime('%Y-%m-%d'))                         ]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Salesperson" domain="[]" context="{'group_by':'salesman_id'}"/>
+                    <filter name="customer" string="Customer" domain="[]" context="{'group_by':'order_partner_id'}"/>
+                    <filter string="Requested Date Month" domain="[]" context="{'group_by':'requested_date'}"/>
+                </group>
+                <separator/>
+                <filter string="Sales" name="sales" domain="[('state','in',('progress','done'))]"/>
+                <separator/>
+                <filter string="To Invoice" domain="[('invoice_status','=','to invoice')]"/>
+                <filter string="Upselling" domain="[('invoice_status','=','upselling')]"/>
            </search>
         </field>
     </record>
