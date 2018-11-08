@@ -98,7 +98,7 @@
       <field name="arch" type="xml">
         <pivot string="Sale Orders Lines">
           <field name="team_id" type="col" />
-          <field name="requested_date" interval="month" type="row" />
+          <field name="dnk_requested_date" interval="month" type="row" />
         </pivot>
       </field>
     </record>
@@ -125,7 +125,7 @@
                 <group expand="0" string="Group By">
                     <filter string="Salesperson" domain="[]" context="{'group_by':'salesman_id'}"/>
                     <filter name="customer" string="Customer" domain="[]" context="{'group_by':'order_partner_id'}"/>
-                    <filter string="Requested Date Month" domain="[]" context="{'group_by':'requested_date'}"/>
+                    <filter string="Requested Date Month" domain="[]" context="{'group_by':'dnk_requested_date'}"/>
                 </group>
                 <separator/>
                 <filter string="Sales" name="sales" domain="[('state','in',('progress','done'))]"/>

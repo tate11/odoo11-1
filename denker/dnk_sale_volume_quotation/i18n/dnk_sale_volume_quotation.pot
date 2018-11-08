@@ -102,8 +102,8 @@ msgstr "Date Ordered:"
 
 #. module: dnk_sale_volume_quotation
 #: model:ir.ui.view,arch_db:dnk_sale_volume_quotation.dnk_report_saleorder_document_volume_quotation
-msgid "Delay (days)"
-msgstr "Delay (days)"
+msgid "Lead Time (days)"
+msgstr "Lead Time (days)"
 
 #. module: dnk_sale_volume_quotation
 #: model:ir.ui.view,arch_db:dnk_sale_volume_quotation.dnk_report_saleorder_document_volume_quotation
@@ -184,4 +184,3 @@ msgstr "Unit Price"
 #: model:ir.ui.view,arch_db:dnk_sale_volume_quotation.dnk_report_saleorder_document_volume_quotation
 msgid "UoM"
 msgstr "UoM"
-

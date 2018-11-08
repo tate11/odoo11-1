@@ -4,13 +4,12 @@
 # © 2016 Eficent Business and IT Consulting Services, S.L.
 # Copyright 2017 Serpent Consulting Services Pvt. Ltd.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-# -*- coding: utf-8 -*-
+
 {
-    'name': "Denker - Sale Order Line Customer Lead",
+    'name': "Denker - Sale Order & Purchase Order to Production Order Link",
 
     'summary': """
-        Agrega el campo "Días de Entrega" a las líneas de una Order de Venta,
-        de acuerdo a la política de entrega definida en el producto (campo "Plazo de entrega del cliente")""",
+        Este módulo agrega un enlace en una Orden de Producción hacia un Pedido de Ventas y viceversa además de una Orden de Compra hacia un Pedido de Ventas""",
 
     'author': "José Candelas",
     'website': "http://www.grupodenker.com",
@@ -22,14 +21,13 @@
     'version': '11.0.1.0',
 
     # any module necessary for this one to work correctly
-    'depends': ['sale', 'dnk_sale_order_commitment_date'],
+    'depends': ['sale', 'mrp', 'dnk_sale_order_line_menu'],
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
-        # 'security/sale_order_security.xml',
-        'views/sale_order_line_views.xml',
-        'views/sale_report_templates.xml',
+        'views/mrp_production_views.xml',
+        'views/purchase_order_views.xml',
+        'views/sale_order_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

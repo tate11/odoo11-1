@@ -102,7 +102,7 @@ msgstr "Fecha del Pedido:"
 
 #. module: dnk_sale_volume_quotation
 #: model:ir.ui.view,arch_db:dnk_sale_volume_quotation.dnk_report_saleorder_document_volume_quotation
-msgid "Delay (days)"
+msgid "Lead Time (days)"
 msgstr "Plazo (días)"
 
 #. module: dnk_sale_volume_quotation
