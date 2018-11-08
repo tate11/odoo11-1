@@ -134,7 +134,7 @@
                                       <td t-if="doc.state in ['draft','sent']" class="text-right">
                                           <span t-field="l.product_uom" groups="product.group_uom"/>
                                       </td>
-                                      <td t-if="doc.state not in ['draft','sent']" class="text-right"><span t-field="l.requested_date"/></td>
+                                      <td t-if="doc.state not in ['draft','sent']" class="text-right"><span t-field="l.dnk_requested_date"/></td>
                                       <td t-if="doc.state in ['draft','sent']" class="text-right"><span t-field="l.customer_lead"/></td>
                                       <td t-if="doc.state not in ['draft','sent']" class="text-right">
                                           <span t-esc="', '.join(map(lambda x: (x.description or x.name), l.tax_id))"/>
