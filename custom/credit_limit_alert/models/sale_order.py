@@ -33,7 +33,9 @@ class CreditLimitAlertSaleOrder(models.Model):
         else:
 
             if self.partner_id.credit_limit != 0:
-                if self.partner_id.credit + self.amount_total > self.partner_id.credit_limit:
+                credit = self.env['res.currency']._compute(self.partner_id.currency_id,self.currency_id,self.partner_id.credit)
+                credit_limit = self.env['res.currency']._compute(self.partner_id.currency_id,self.currency_id,self.partner_id.credit_limit)
+                if credit + self.amount_total > credit_limit:
                     if self.payment_term_id.name != 'Immediate Payment':
                         if self.permitted_credit_limit is not True:
                             self.avisado = True
