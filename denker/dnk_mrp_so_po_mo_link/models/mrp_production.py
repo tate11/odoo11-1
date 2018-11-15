@@ -39,6 +39,22 @@ class MrpProduction(models.Model):
         SaleOrder = self.env['sale.order']
         SaleOrderLine = self.env['sale.order.line']
         for mrp_production in self:
+            print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+            for movesi in mrp_production.move_dest_ids:
+                print("move_dest_ids: ", movesi)
+
+            print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+            for movesi in mrp_production.move_raw_ids:
+                print("move_raw_ids: ", movesi)
+
+            print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+            for movesi in mrp_production.move_finished_ids:
+                print("move_finished_ids: ", movesi)
+
+            print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+            for movesi in mrp_production.finished_move_line_ids:
+                print("finished_move_line_ids: ", movesi)
+
             # Extraer los números de pedidos en la forma SO001, SO002, SO003
             if not mrp_production.origin:
                 break
@@ -74,7 +90,6 @@ class MrpProduction(models.Model):
                     # Buscar la Línea de Pedido relacionada al pedido
                     for sale_order_line in sale.order_line:
                         if sale_order_line.product_id.id == production.product_id.id and \
-                           sale_order_line.product_uom_qty == production.product_qty and \
                            not sale_order_line.dnk_mrp_production_id:
                             production.dnk_sale_order_line_ids = [sale_order_line.id]
                             sale_order_line.write({'dnk_mrp_production_id': production.id})

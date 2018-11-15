@@ -35,7 +35,7 @@ class ProductTemplate(models.Model):
             template.dnk_theoretical_cost_currency_id = template.product_variant_ids.dnk_theoretical_cost_currency_id
         for template in (self - unique_variants):
             template.dnk_theoretical_cost = 0.0
-            template.dnk_theoretical_cost_currency_id = template.product_variant_ids.dnk_theoretical_cost_currency_id
+            template.dnk_theoretical_cost_currency_id = template.product_variant_ids[0].dnk_theoretical_cost_currency_id
 
 
 class ProductProduct(models.Model):
