@@ -96,23 +96,30 @@ class CreditLimitAlertStockPicking(models.Model):
     @api.multi
     def button_validate(self):
         self.ensure_one()
-        current_date = date.today() - timedelta(days=15)
-        cr = self.env.cr
+        if self.partner_id:
+            if self.picking_type_code == 'outgoing':
+                current_date = date.today() - timedelta(days=15)
+                cr = self.env.cr
 
-        sql = ""
+                sql = ""
 
-        if self.partner_id.parent_id:
-            sql = "select COALESCE(SUM(1),0) FROM account_invoice WHERE type='out_invoice' AND state='open' AND date_due<='"+str(current_date)+"' AND (partner_id='"+str(self.partner_id.id)+"' OR partner_id='"+str(self.partner_id.parent_id.id)+"')"
+                if self.partner_id.parent_id:
+                    sql = "select COALESCE(SUM(1),0) FROM account_invoice WHERE type='out_invoice' AND state='open' AND date_due<='"+str(current_date)+"' AND (partner_id='"+str(self.partner_id.id)+"' OR partner_id='"+str(self.partner_id.parent_id.id)+"')"
+                else:
+                    sql = "select COALESCE(SUM(1),0) FROM account_invoice WHERE type='out_invoice' AND state='open' AND date_due<='"+str(current_date)+"' AND partner_id='"+str(self.partner_id.id)+"'"
+
+                cr.execute(sql)
+                facturas_vencidas = cr.fetchone()
+                fac = max(facturas_vencidas)
+                if fac >= 1 and self.allow_delivery is not True:
+                    raise exceptions.ValidationError('Este cliente o la empresa a la que pertenece tiene facturas vencidas.')
+                else:
+                    res = super(CreditLimitAlertStockPicking, self).button_validate()
+                    return res
+            else:
+                res = super(CreditLimitAlertStockPicking, self).button_validate()
+                return res
+
         else:
-            sql = "select COALESCE(SUM(1),0) FROM account_invoice WHERE type='out_invoice' AND state='open' AND date_due<='"+str(current_date)+"' AND partner_id='"+str(self.partner_id.id)+"'"
-
-        cr.execute(sql)
-        facturas_vencidas = cr.fetchone()
-        fac = max(facturas_vencidas)
-        if fac >= 1 and self.allow_delivery is not True and self.picking_type_code == 'outgoing':
-            raise exceptions.ValidationError('Este cliente o la empresa a la que pertenece tiene facturas vencidas.')
-        else:
-
             res = super(CreditLimitAlertStockPicking, self).button_validate()
-
             return res
