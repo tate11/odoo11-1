@@ -16,7 +16,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: dnk_sale_order_commitment_date
-#: model:mail.template,body_html:dnk_sale_order_commitment_date.dnk_commitment_date_email_template_edi_sale
+#: model:mail.template,body_html:dnk_sale_order_commitment_date.dnk_reconfirmation_date_email_template_edi_sale
 msgid "\n"
 "<p>Dear ${object.partner_id.name}\n"
 "% set access_action = object.with_context(force_website=True).get_access_action()\n"
@@ -37,7 +37,7 @@ msgid "\n"
 "% if object.origin:\n"
 "(with reference: ${object.origin} )\n"
 "% endif\n"
-"has been changed from <strong>${object.dnk_original_commitment_date}</strong> to <strong>${object.commitment_date}</strong>.\n"
+"has been changed from <strong>${object.dnk_commitment_date}</strong> to <strong>${object.commitment_date}</strong>.\n"
 "</p>\n"
 "\n"
 "<p>We apologize for any inconvenience this may cause.</p>\n"
@@ -84,7 +84,7 @@ msgstr "\n"
 "% if object.origin:\n"
 "(with reference: ${object.origin} )\n"
 "% endif\n"
-"has been changed from <strong>${object.dnk_original_commitment_date}</strong> to <strong>${object.commitment_date}</strong>.\n"
+"has been changed from <strong>${object.dnk_commitment_date}</strong> to <strong>${object.commitment_date}</strong>.\n"
 "</p>\n"
 "\n"
 "<p>We apologize for any inconvenience this may cause.</p>\n"
@@ -113,7 +113,7 @@ msgstr "\n"
 "            "
 
 #. module: dnk_sale_order_commitment_date
-#: model:mail.template,subject:dnk_sale_order_commitment_date.dnk_commitment_date_email_template_edi_sale
+#: model:mail.template,subject:dnk_sale_order_commitment_date.dnk_reconfirmation_date_email_template_edi_sale
 msgid "${object.company_id.name} ${object.state in ('draft', 'sent') and 'Quotation' or 'Order'} (Ref ${object.name or 'n/a' })"
 msgstr "${object.company_id.name} ${object.state in ('draft', 'sent') and  'Presupuesto' or 'Pedido'} (Ref ${object.name or 'n/a' })"
 
@@ -123,14 +123,14 @@ msgid "- Abbreviation"
 msgstr "- Abreviación"
 
 #. module: dnk_sale_order_commitment_date
-#: model:ir.model.fields,field_description:dnk_sale_order_commitment_date.field_sale_order_dnk_original_commitment_date
+#: model:ir.model.fields,field_description:dnk_sale_order_commitment_date.field_sale_order_dnk_commitment_date
 msgid "- Commitment Date"
 msgstr "- Fecha Compromiso"
 
 #. module: dnk_sale_order_commitment_date
-#: model:ir.model.fields,field_description:dnk_sale_order_commitment_date.field_res_partner_dnk_recommitment_notification
-#: model:ir.model.fields,field_description:dnk_sale_order_commitment_date.field_res_users_dnk_recommitment_notification
-msgid "- Recommitment Notification"
+#: model:ir.model.fields,field_description:dnk_sale_order_commitment_date.field_res_partner_dnk_reconfirmation_notification
+#: model:ir.model.fields,field_description:dnk_sale_order_commitment_date.field_res_users_dnk_reconfirmation_notification
+msgid "- Reconfirmation Notification"
 msgstr "- Notificación de Reconfirmación"
 
 #. module: dnk_sale_order_commitment_date
@@ -149,7 +149,7 @@ msgid "Abbreviation"
 msgstr "Abreviación"
 
 #. module: dnk_sale_order_commitment_date
-#: model:ir.model.fields,field_description:dnk_sale_order_commitment_date.field_sale_order_dnk_commitment_date_changed
+#: model:ir.model.fields,field_description:dnk_sale_order_commitment_date.field_sale_order_dnk_reconfirmation_date_changed
 msgid "Commitment Date Changed?"
 msgstr "¿Ha cambiado la Fecha Compromiso?"
 
@@ -170,13 +170,13 @@ msgid "Days elapsed when the package arrives at the branch"
 msgstr "Días transcurridos cuando el paquete llega a la sucursal."
 
 #. module: dnk_sale_order_commitment_date
-#: model:ir.model.fields,help:dnk_sale_order_commitment_date.field_res_partner_dnk_recommitment_notification
-#: model:ir.model.fields,help:dnk_sale_order_commitment_date.field_res_users_dnk_recommitment_notification
-msgid "If checked, every change of \"Recommitment Date\" a mail notification is sent to the customer"
-msgstr "Si se marca, en cada cambio de "Fecha Compromiso" se enviará una notificación de correo al cliente."
+#: model:ir.model.fields,help:dnk_sale_order_commitment_date.field_res_partner_dnk_reconfirmation_notification
+#: model:ir.model.fields,help:dnk_sale_order_commitment_date.field_res_users_dnk_reconfirmation_notification
+msgid "If checked, every change of \"Reconfirmation Date\" a mail notification is sent to the customer"
+msgstr "Si se marca, en cada cambio de "Fecha Reconfirmación" se enviará una notificación de correo al cliente."
 
 #. module: dnk_sale_order_commitment_date
-#: model:ir.model.fields,help:dnk_sale_order_commitment_date.field_sale_order_dnk_original_commitment_date
+#: model:ir.model.fields,help:dnk_sale_order_commitment_date.field_sale_order_dnk_commitment_date
 msgid "Once the Sale Oder was confirmed this field can be modified but only if a notification is sent to the customer."
 msgstr "Una vez que se confirmó el pedido de venta, este campo se puede modificar, pero solo si se envía una notificación al cliente."
 

@@ -21,14 +21,14 @@
     'version': '11.0.1.0',
 
     # any module necessary for this one to work correctly
-    'depends': ['sale', 'crm', 'dnk_sale_order_dates', 'dnk_sale_order_line_date'],
+    'depends': ['sale', 'crm'],
 
     # always loaded
     'data': [
         'views/mail_commitment_date_template_data.xml',
         'views/crm_team_views.xml',
         'views/partner_views.xml',
-        'views/sale_report_templates.xml',
+        'views/sale_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

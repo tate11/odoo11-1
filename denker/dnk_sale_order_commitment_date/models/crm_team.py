@@ -16,11 +16,11 @@ class crm_team_transit_days(models.Model):
         if self.dnk_abbreviation:
             self.dnk_abbreviation = self.dnk_abbreviation.upper()
 
+
     dnk_transit_days = fields.Integer(
                     string='- Transit Days',
                     help='Days elapsed when the package arrives at the branch',
                     default=3)
-
     dnk_abbreviation = fields.Char(
                     string='- Abbreviation',
                     help='Abbreviation', size=2)

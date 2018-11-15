@@ -26,10 +26,10 @@ from odoo import models, fields
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
-    sale_order_line_ids = fields.Many2many(
-                                comodel_name='sale.order.line', string="Sale Order Line",
+    dnk_sale_order_line_ids = fields.Many2many(
+                                comodel_name='sale.order.line', string="- Sale Order Line",
                                 relation='dnk_production_order_sale_order_line_link',
-                                column1='mrp_production_id', column2='sale_order_line_id',
+                                column1='dnk_mrp_production_id', column2='sale_order_line_id',
                                 compute='_compute_sale_order_by_origin',
                                 readonly=True, store=True)
 
@@ -51,15 +51,15 @@ class MrpProduction(models.Model):
                     # Buscar la Línea de Pedido Correcta
                     for sale_order_line in sale_order.order_line:
                         if sale_order_line.product_id.id == mrp_production.product_id.id: # and \
-                            # not sale_order_line.mrp_production_id:
+                            # not sale_order_line.dnk_mrp_production_id:
                             # sale_order_line.product_uom_qty == mrp_production.product_qty and \
                             sale_orders_line_list.append(sale_order_line.id)
                             #mrp_production.sale_order_line_id = sale_order_line.id
-                            sale_order_line.write({'mrp_production_id': mrp_production.id})
-                            #sale_order_line.mrp_production_id = production.id
+                            sale_order_line.write({'dnk_mrp_production_id': mrp_production.id})
+                            #sale_order_line.dnk_mrp_production_id = production.id
                             break
 
-            mrp_production.sale_order_line_ids = sale_orders_line_list
+            mrp_production.dnk_sale_order_line_ids = sale_orders_line_list
 
 
     @api.multi
@@ -70,14 +70,12 @@ class MrpProduction(models.Model):
                 sale_order = self.env['sale.order']
                 sale = sale_order.search([('procurement_group_id', '=', production.procurement_group_id.id)])
                 if sale:
-                    production.sale_order_id = sale.id
+                    # production.sale_order_id = sale.id
                     # Buscar la Línea de Pedido relacionada al pedido
-                    for sale_order_line in sale.order_line:
-                        print('mrp_production_id', sale_order_line, sale_order_line.mrp_production_id)
                     for sale_order_line in sale.order_line:
                         if sale_order_line.product_id.id == production.product_id.id and \
                            sale_order_line.product_uom_qty == production.product_qty and \
-                           not sale_order_line.mrp_production_id:
-                            production.sale_order_line_ids = [sale_order_line.id]
-                            sale_order_line.write({'mrp_production_id': production.id})
+                           not sale_order_line.dnk_mrp_production_id:
+                            production.dnk_sale_order_line_ids = [sale_order_line.id]
+                            sale_order_line.write({'dnk_mrp_production_id': production.id})
                             break

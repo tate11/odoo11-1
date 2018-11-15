@@ -41,10 +41,8 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='payment_term_id']" position="after">
                 <field name="dnk_requested_date"/>
-                <field name="dnk_original_commitment_date"/>
-                <field name="dnk_commitment_date" attrs="{'readonly': [('state', 'not in', ('sale', 'done'))]}" />
+                <field name="dnk_commitment_date"/>
                 <field name="dnk_effective_date"/>
-                <field name="dnk_commitment_date_changed" invisible="1"/>
             </xpath>
         </field>
     </record>
@@ -59,6 +57,8 @@
             </field>
             <xpath expr="//field[@name='order_line']/form//field[@name='tax_id']" position="after">
                 <field name="dnk_requested_date" />
+                <field name="dnk_reconfirmation_date" attrs="{'readonly': [('state', 'not in', ('sale', 'done'))]}" />
+                <field name="dnk_reconfirmation_date_changed" invisible="1"/>
             </xpath>
             <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
                 <field name="dnk_requested_date"/>

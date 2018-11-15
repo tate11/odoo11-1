@@ -5,6 +5,6 @@ from odoo import api, fields, models, _
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    dnk_recommitment_notification = fields.Boolean(
-        string='- Recommitment Notification', help='If checked, every change of "Recommitment Date" a mail notification is sent to the customer',
+    dnk_reconfirmation_notification = fields.Boolean(
+        string='- Reconfirmation Notification', help='If checked, every change of "Reconfirmation Date" a mail notification is sent to the customer',
         default=True, store=True)

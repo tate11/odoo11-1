@@ -11,23 +11,23 @@ from odoo import api, fields, models
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    mrp_production_id = fields.Many2one('mrp.production', string="MO", readonly=True,
+    dnk_mrp_production_id = fields.Many2one('mrp.production', string="- MO", readonly=True,
                                     copy=False, store=True)
-    mrp_production_state = fields.Selection([
+    dnk_mrp_production_state = fields.Selection([
         ('confirmed', 'Confirmed'),
         ('planned', 'Planned'),
         ('progress', 'In Progress'),
         ('done', 'Done'),
-        ('cancel', 'Cancelled')], string='MO State', related='mrp_production_id.state', readonly=True,
+        ('cancel', 'Cancelled')], string='- MO State', related='dnk_mrp_production_id.state', readonly=True,
         copy=False, track_visibility='onchange', store=True)
 
-    purchase_order_id = fields.Many2one('purchase.order', string="PO", readonly=True,
-                                    copy=False, store=True)
-    purchase_order_state = fields.Selection([
+    dnk_purchase_order_id = fields.Many2one('purchase.order', string="- PO", readonly=True,
+                                    copy=False)
+    dnk_purchase_order_state = fields.Selection([
         ('draft', 'RFQ'),
         ('sent', 'RFQ Sent'),
         ('to approve', 'To Approve'),
         ('purchase', 'Purchase Order'),
         ('done', 'Locked'),
-        ('cancel', 'Cancelled')], string='PO State', related='purchase_order_id.state', readonly=True,
-        copy=False, track_visibility='onchange', store=True)
+        ('cancel', 'Cancelled')], string='- PO State', related='dnk_purchase_order_id.state', readonly=True,
+        copy=False, track_visibility='onchange')

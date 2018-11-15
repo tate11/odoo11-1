@@ -9,8 +9,8 @@
             <xpath expr="//form" position="attributes">
                 <attribute name="create">false</attribute>
             </xpath>
-            <xpath expr="//form/header/button[10]" position="attributes">
-                <attribute name="states">sent,sale,done</attribute>
+            <xpath expr="//form/header/button[10]" position="after">
+                <button name="action_quotation_send" string="Send by Email" type="object" states="done"/>
             </xpath>
         </field>
     </record>
@@ -24,8 +24,8 @@
             <xpath expr="//form" position="attributes">
                 <attribute name="create">true</attribute>
             </xpath>
-            <xpath expr="//form/header/button[10]" position="attributes">
-                <attribute name="states">sent,sale,done</attribute>
+            <xpath expr="//form/header/button[10]" position="after">
+                <button name="action_quotation_send" string="Send by Email" type="object" states="done"/>
             </xpath>
         </field>
     </record>

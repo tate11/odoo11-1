@@ -6,10 +6,10 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': "Denker - Sale Order & Purchase Order to Production Order Link",
+    'name': "Denker - Purchase Order and Production Order to Sale Order Link",
 
     'summary': """
-        Este módulo agrega un enlace en una Orden de Producción hacia un Pedido de Ventas y viceversa además de una Orden de Compra hacia un Pedido de Ventas""",
+        Este módulo agrega un enlace de las Orden de Producción o de las Líneas de Orden de Compra hacia las Líneas de Pedidos de Ventas y viceversa.""",
 
     'author': "José Candelas",
     'website': "http://www.grupodenker.com",

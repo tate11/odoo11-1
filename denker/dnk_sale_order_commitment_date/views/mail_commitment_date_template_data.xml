@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="1">
+    <data noupdate="0">
 
         <!--Email template -->
-        <record id="dnk_commitment_date_email_template_edi_sale" model="mail.template">
+        <record id="dnk_reconfirmation_date_email_template_edi_sale" model="mail.template">
             <field name="name">Dnk - Commitment Date - Send by Email</field>
-            <field name="email_from">${object.user_id.email}</field>
-            <field name="subject">${object.company_id.name} ${object.state in ('draft', 'sent') and 'Quotation' or 'Order'} (Ref ${object.name or 'n/a' })</field>
-            <field name="partner_to">${object.partner_id.id}</field>
-            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="email_from">${object.order_id.user_id.email}</field>
+            <field name="subject">${object.company_id.name} ${object.order_id.state in ('draft', 'sent') and 'Quotation' or 'Order'} (Ref ${object.order_id.name or 'n/a' }, Product ${object.name or 'n/a' })</field>
+            <field name="partner_to">${object.order_id.partner_id.id}</field>
+            <field name="model_id" ref="sale.model_sale_order_line"/>
             <field name="auto_delete" eval="True"/>
-            <field name="lang">${object.partner_id.lang}</field>
+            <field name="lang">${object.order_id.partner_id.lang}</field>
             <field name="body_html"><![CDATA[
-<p>Dear ${object.partner_id.name}
+<p>Dear ${object.order_id.partner_id.name}
 % set access_action = object.with_context(force_website=True).get_access_action()
 % set is_online = access_action and access_action['type'] == 'ir.actions.act_url'
-% set doc_name = 'quotation' if object.state in ('draft', 'sent') else 'order'
-% set pay_sign_name =  object.get_portal_confirmation_action()
-% set access_name = is_online and object.state in ('draft', 'sent') and pay_sign_name in ('pay', 'sign') and 'Accept and %s online' % pay_sign_name or 'View %s' % doc_name
+% set doc_name = 'quotation' if object.order_id.state in ('draft', 'sent') else 'order'
+% set pay_sign_name =  object.order_id.get_portal_confirmation_action()
+% set access_name = is_online and object.order_id.state in ('draft', 'sent') and pay_sign_name in ('pay', 'sign') and 'Accept and %s online' % pay_sign_name or 'View %s' % doc_name
 % set access_url = is_online and object.get_mail_url() or ''
 
 
-% if object.partner_id.parent_id:
-    (<i>${object.partner_id.parent_id.name}</i>)
+% if object.order_id.partner_id.parent_id:
+    (<i>${object.order_id.partner_id.parent_id.name}</i>)
 % endif
 ,</p>
 <p>
-The <strong>Commitment Date</strong> in ${doc_name} <strong>${object.name}</strong>
+The <strong>Commitment Date</strong> in ${doc_name} <strong>${object.order_id.name}, Product ${object.name}</strong>
 
 % if object.origin:
-(with reference: ${object.origin} )
+(with reference: ${object.order_id.origin} )
 % endif
-has been changed from <strong>${object.dnk_original_commitment_date}</strong> to <strong>${object.commitment_date}</strong>.
+has been changed from <strong>${object.dnk_requested_date}</strong> to <strong>${object.dnk_reconfirmation_date}</strong>.
 </p>
 
 <p>We apologize for any inconvenience this may cause.</p>
@@ -52,8 +52,8 @@ has been changed from <strong>${object.dnk_original_commitment_date}</strong> to
 <p>Thank you,</p>
 
 <p style="color:#888888;">
-% if object.user_id and object.user_id.signature:
-    ${object.user_id.signature | safe}
+% if object.order_id.user_id and object.order_id.user_id.signature:
+    ${object.order_id.user_id.signature | safe}
 % endif
 </p>
 ]]>

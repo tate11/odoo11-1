@@ -26,6 +26,7 @@ def add_business_days(from_date, add_days):
         business_days_to_add -= 1
     return current_date
 
+
 def next_business_day(from_date):
     holydaysmex = Mexico()
     current_date = from_date
