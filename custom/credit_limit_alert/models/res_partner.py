@@ -11,10 +11,9 @@ class CreditLimitAlertResPartner(models.Model):
     @api.one
     @api.depends('credit_limit','credit_available','credit')
     def _compute_amount_credit_available(self):
-
         self.credit_available = self.credit_limit - self.credit
-
         pass
+        
     @api.multi
     def call_wizard(self):
         wizard_form = self.env.ref('credit_limit_alert.credit_limit_alert_partner_statement_wizard_view', False)
